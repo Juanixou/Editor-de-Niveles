@@ -33,12 +33,12 @@ public class MoveObject : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        /*Codigo de Traslación
+        /*Codigo de Traslación*/
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         transform.position = curPosition;
-        */
+        
 
         /*Código de Rotación
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
@@ -60,10 +60,11 @@ public class MoveObject : MonoBehaviour {
 
         transform.localScale = size;
         */
-
+        /*
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
         Vector3 curSize = Camera.main.ScreenToWorldPoint(curScreenPoint) + offsetSize;
         transform.localScale = curSize;
+        */
     }
 }

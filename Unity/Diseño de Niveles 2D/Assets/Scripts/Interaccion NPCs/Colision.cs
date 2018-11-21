@@ -6,6 +6,7 @@ public class Colision : MonoBehaviour {
 
     private Dialogos dialog;
     private GameObject gestorTexto;
+    private bool colision;
 
 	// Use this for initialization
 	void Start () {
@@ -15,21 +16,31 @@ public class Colision : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if ((colision) && (Input.GetKeyDown(KeyCode.E)))
+        {
+            Debug.Log("Y me llamo " + this.name);
+            dialog.GestionarDialogo(this.name); 
+        }
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if ((collision.tag == "Player"))
+        {
+            colision = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if ((collision.tag == "Player") && (Input.GetKeyDown(KeyCode.E)))
-        {
-            Debug.Log("Y me llamo " + this.name);
-            dialog.GestionarDialogo(this.name);
-        }
+
             
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if ((collision.tag == "Player"))
+        {
+            colision = false;
+        }
     }
 }
