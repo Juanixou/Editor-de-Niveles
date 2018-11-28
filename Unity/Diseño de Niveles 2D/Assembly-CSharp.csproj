@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\MoveObject.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerPhysics.cs" />
+    <Compile Include="Assets\SelectionManager.cs" />
     <None Include="Assets\BayatGames\Free Platform Game Assets\Readme.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/GitHub/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

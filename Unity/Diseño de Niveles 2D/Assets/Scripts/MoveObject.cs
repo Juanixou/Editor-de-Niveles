@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveObject : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class MoveObject : MonoBehaviour {
     private Vector3 offset;
 
     private Vector3 offsetSize;
+
+    private string selection = "Move";
 
 
     // Use this for initialization
@@ -33,19 +36,37 @@ public class MoveObject : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        /*Codigo de Traslación*/
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        switch (selection)
+        {
+            case "Move":
+                /*Codigo de Traslación*/
+                Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        transform.position = curPosition;
+                Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+                transform.position = curPosition;
+                break;
+            case "Rotate":
+                /*Código de Rotación*/
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
+
+
+                transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((mousePosition.y - transform.position.y), (mousePosition.x - transform.position.x)) * Mathf.Rad2Deg);
+
+                break;
+            case "Scale":
+                /*Código de Escalado*/
+                Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+
+                Vector3 curSize = Camera.main.ScreenToWorldPoint(curScreenPoint2) + offsetSize;
+                transform.localScale = curSize;
+                break;
+        }
+
         
 
-        /*Código de Rotación
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
+        
 
 
-        transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((mousePosition.y - transform.position.y), (mousePosition.x - transform.position.x)) * Mathf.Rad2Deg);
-        */
         /*
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
@@ -60,11 +81,13 @@ public class MoveObject : MonoBehaviour {
 
         transform.localScale = size;
         */
-        /*
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
-        Vector3 curSize = Camera.main.ScreenToWorldPoint(curScreenPoint) + offsetSize;
-        transform.localScale = curSize;
-        */
     }
+
+    public void SelectTransform(string tipo)
+    {
+        selection = tipo;
+        Debug.Log(selection);
+    }
+
 }

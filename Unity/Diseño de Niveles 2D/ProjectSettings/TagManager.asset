@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cube
   - Menu
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - Player
   - NPC
-  - 
-  - 
+  - Wall
+  - Ground
   - 
   - 
   - 
