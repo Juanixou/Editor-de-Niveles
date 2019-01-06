@@ -10,7 +10,7 @@ public class Dialogos : MonoBehaviour {
     public GameObject canvas;
     public GameObject mensaje;
     private GameObject player;
-    private Platformer2DUserControl movement;
+    private PlayerMovement movement;
     private float time;
     private Text texto;
     private bool bloqMov;
@@ -19,7 +19,7 @@ public class Dialogos : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         time = 0.0f;
-        movement = player.GetComponent<Platformer2DUserControl>();
+        movement = player.GetComponent<PlayerMovement>();
         bloqMov = false;
     }
 	

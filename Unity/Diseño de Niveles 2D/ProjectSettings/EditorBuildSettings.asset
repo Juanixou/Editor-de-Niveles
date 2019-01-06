@@ -4,4 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/City.unity
+    guid: 06ab10d41f0cce947b03baab9bcf1448
+  - enabled: 1
+    path: "Assets/Scenes/Dise\xF1o de Niveles 2D.unity"
+    guid: ecec14afcbc9f9e4daf3fa928b8d1800
+  - enabled: 1
+    path: Assets/Scenes/Jump Trial.unity
+    guid: 55fd1ff12a09f294786619776ac18334
+  - enabled: 1
+    path: Assets/Scenes/Push Objects.unity
+    guid: 10721f45db95a9440a06915f38e49b42
+  m_configObjects: {}

@@ -12,10 +12,13 @@ public class PlayerMovement : MonoBehaviour {
     float groundRadius = 0.2f;
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
-    public float jumpForce = 700f;
+    public float jumpForce;
+    public float shortJumpForce = 300f;
+    public float longJumpForce = 700f;
     public float wallForce = 200f;
     private bool doubleJump = false;
     private float moveHorizontal = 0.0f;
+    private float counter = 0.0f;
 
     private bool caminando;
     private Rigidbody2D rb2d;
@@ -34,6 +37,23 @@ public class PlayerMovement : MonoBehaviour {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         Walk(moveHorizontal);
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            
+            counter += Time.deltaTime;
+            Debug.Log("Counter: " + counter);
+            if (counter <= 50.0)
+            {
+
+                jumpForce = shortJumpForce;
+            }
+            else
+            {
+
+                jumpForce = longJumpForce;
+            }
+        }
+
         GroundJump();
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -41,6 +61,12 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetBool("Correr", false);
         }
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            
+            counter = 0.0f;
+
+        }
 
     }
 
@@ -91,6 +117,11 @@ public class PlayerMovement : MonoBehaviour {
 
     public void GroundJump()
     {
+        counter++;
+        if(counter <= 30)
+        {
+
+        }
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
         anim.SetBool("Ground", grounded);
@@ -115,34 +146,10 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    public void WallJump(float direction)
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            walled = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsWall);
-            anim.SetBool("Ground", walled);
-            anim.SetFloat("vSpeed", rb2d.velocity.y);
-
-            if ((walled))
-            {
-                anim.SetBool("Ground", false);
-                if (direction > 0)
-                {
-                    rb2d.AddForce(new Vector2(-wallForce, jumpForce));
-                }
-                else
-                {
-                    rb2d.AddForce(new Vector2(wallForce, jumpForce));
-                }
-
-            }
-        }
-
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.name == "ParedColl")
+        Debug.Log(collision.collider.name);
+        if (collision.collider.name == "Pared")
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
