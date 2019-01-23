@@ -6,6 +6,7 @@ public class Colision : MonoBehaviour {
 
     private Dialogos dialog;
     private GameObject gestorTexto;
+    public GameObject tecla;
     private bool colision;
 
 	// Use this for initialization
@@ -18,6 +19,7 @@ public class Colision : MonoBehaviour {
 	void Update () {
         if ((colision) && (Input.GetKeyDown(KeyCode.E)))
         {
+            tecla.SetActive(false);
             Debug.Log("Y me llamo " + this.name);
             dialog.GestionarDialogo(this.name); 
         }
@@ -25,8 +27,10 @@ public class Colision : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if ((collision.tag == "Player"))
         {
+            tecla.SetActive(true);
             colision = true;
         }
     }
@@ -40,6 +44,7 @@ public class Colision : MonoBehaviour {
     {
         if ((collision.tag == "Player"))
         {
+            tecla.SetActive(false);
             colision = false;
         }
     }
