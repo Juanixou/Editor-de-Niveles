@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Push Objects.unity
     guid: 10721f45db95a9440a06915f38e49b42
+  - enabled: 1
+    path: Assets/Scenes/Wall Jump Trial.unity
+    guid: c6affdd6c3c693d498bd199b470a554e
   m_configObjects: {}

@@ -57,40 +57,18 @@ public class MoveObject : MonoBehaviour {
                 /*Código de Escalado*/
                 Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
                 //Se calcula la diferencia entre la posicion anterior y nueva del ratón y se aplica un pequeño offset para poder ajustar bien el tamaño.
-                Vector3 curSize = (curScreenPoint2-last_mouse_pos)*0.01f + transform.localScale;
-                transform.localScale = curSize;
+                Vector3 curSize = (curScreenPoint2-last_mouse_pos)*0.01f + new Vector3(GetComponent<SpriteRenderer>().size.x, GetComponent<SpriteRenderer>().size.y,0);
+                GetComponent<SpriteRenderer>().size = curSize;
                 last_mouse_pos = curScreenPoint2;
                 break;
             default:
                 break;
         }
-
-        
-
-        
-
-
-        /*
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-
-        float startX = curPosition.x;
-        float startY = curPosition.y;
-        float startSize = transform.localScale.z;
-        Vector3 size = transform.localScale;
-        size.x =  (Input.mousePosition.x - startX) * 0.02f;
-        size.y =  (Input.mousePosition.y - startY) * 0.02f;
-
-        transform.localScale = size;
-        */
-
     }
 
     public void SelectTransform(string tipo)
     {
         selection = tipo;
-        Debug.Log(selection);
     }
 
 }

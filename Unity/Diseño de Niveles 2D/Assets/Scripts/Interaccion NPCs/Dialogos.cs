@@ -25,8 +25,13 @@ public class Dialogos : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        time += Time.deltaTime;
-        if((time>= 5.0f)&&(bloqMov==true))
+        //time += Time.deltaTime;
+        //if((time>= 5.0f)&&(bloqMov==true))
+        //{
+
+        //}
+
+        if (mensaje.active == true && Input.GetKey(KeyCode.Space))
         {
             movement.enabled = true;
             mensaje.SetActive(false);

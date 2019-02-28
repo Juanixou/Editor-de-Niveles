@@ -28,7 +28,13 @@ public class ChangeScene : MonoBehaviour {
                     SceneManager.LoadScene("Jump Trial", LoadSceneMode.Single);
                     break;
                 case "Jump Trial":
+                    SceneManager.LoadScene("Wall Jump Trial", LoadSceneMode.Single);
+                    break;
+                case "Wall Jump Trial":
                     SceneManager.LoadScene("Push Objects", LoadSceneMode.Single);
+                    break;
+                case "Push Objects":
+                    SceneManager.LoadScene("City", LoadSceneMode.Single);
                     break;
                 default:
                     break;

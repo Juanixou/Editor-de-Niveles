@@ -9,16 +9,17 @@ public class PlayerMovement : MonoBehaviour {
     bool grounded = false;
     bool walled = false;
     public Transform groundCheck;
+    public Transform wallCheck;
     float groundRadius = 0.2f;
+    float wallTouchRadius = 0.2f;
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
-    public float jumpForce;
-    public float shortJumpForce = 300f;
-    public float longJumpForce = 700f;
-    public float wallForce = 200f;
+    public float jumpForce=300f;
+    public float jumpPushForce = 50f;
+    public float jumpWallForce = 20f;
     private bool doubleJump = false;
     private float moveHorizontal = 0.0f;
-    private float counter = 0.0f;
+
 
     private bool caminando;
     private Rigidbody2D rb2d;
@@ -37,23 +38,6 @@ public class PlayerMovement : MonoBehaviour {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         Walk(moveHorizontal);
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            
-            counter += Time.deltaTime;
-            Debug.Log("Counter: " + counter);
-            if (counter <= 50.0)
-            {
-
-                jumpForce = shortJumpForce;
-            }
-            else
-            {
-
-                jumpForce = longJumpForce;
-            }
-        }
-
         GroundJump();
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -63,9 +47,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            
-            counter = 0.0f;
-
+            rb2d.AddForce(new Vector2(0, -100));
         }
 
     }
@@ -117,24 +99,28 @@ public class PlayerMovement : MonoBehaviour {
 
     public void GroundJump()
     {
-        counter++;
-        if(counter <= 30)
-        {
-
-        }
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-
+        walled = Physics2D.OverlapCircle(wallCheck.position, wallTouchRadius, whatIsWall);
         anim.SetBool("Ground", grounded);
 
         if (grounded)
         {
             doubleJump = false;
+            walled = false;
         }
+
+        if (walled)
+        {
+            grounded = false;
+            doubleJump = false;
+        }
+
         anim.SetFloat("vSpeed", rb2d.velocity.y);
 
         //Parte utilizada para el salto
         if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Salto Vertical");
             anim.SetBool("Ground", false);
             rb2d.AddForce(new Vector2(0, jumpForce));
             if (!doubleJump && !grounded)
@@ -143,27 +129,36 @@ public class PlayerMovement : MonoBehaviour {
             }
 
         }
-
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        Debug.Log(collision.collider.name);
-        if (collision.collider.name == "Pared")
+        if (walled && Input.GetButtonDown("Jump"))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (moveHorizontal >= 0)
-                {
-                    rb2d.AddForce(new Vector2(-900, jumpForce));
-                }
-                else
-                {
-                    rb2d.AddForce(new Vector2(900, jumpForce));
-                }
-            }
+            Debug.Log("Salto Pared");
+            WallJump();
         }
+
     }
+
+    void WallJump()
+    {
+        rb2d.AddForce(new Vector2(jumpPushForce, jumpWallForce));
+    }
+
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.collider.name == "Pared")
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Space))
+    //        {
+    //            if (moveHorizontal >= 0)
+    //            {
+    //                rb2d.AddForce(new Vector2(-900, jumpForce));
+    //            }
+    //            else
+    //            {
+    //                rb2d.AddForce(new Vector2(900, jumpForce));
+    //            }
+    //        }
+    //    }
+    //}
 
 
 }

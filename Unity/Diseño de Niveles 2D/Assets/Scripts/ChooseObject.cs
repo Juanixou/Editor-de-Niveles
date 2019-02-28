@@ -10,7 +10,7 @@ public class ChooseObject : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        controlador = GameObject.Find("GameController");
+        controlador = GameObject.Find("InstancesController");
         instanciar = controlador.GetComponent<InstantiateElements>();
     }
 
