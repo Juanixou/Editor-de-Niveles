@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: 4307fdb6239fef64d80a59799d4a8405
+  - enabled: 1
     path: Assets/Scenes/City.unity
     guid: 06ab10d41f0cce947b03baab9bcf1448
-  - enabled: 1
-    path: "Assets/Scenes/Dise\xF1o de Niveles 2D.unity"
-    guid: ecec14afcbc9f9e4daf3fa928b8d1800
   - enabled: 1
     path: Assets/Scenes/Jump Trial.unity
     guid: 55fd1ff12a09f294786619776ac18334
@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Wall Jump Trial.unity
     guid: c6affdd6c3c693d498bd199b470a554e
+  - enabled: 1
+    path: "Assets/Scenes/Dise\xF1o de Niveles 2D.unity"
+    guid: ecec14afcbc9f9e4daf3fa928b8d1800
+  - enabled: 1
+    path: Assets/Scenes/Damage Trial.unity
+    guid: ffe522b1b8fed1f49b58d851838272d8
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
+    guid: 163ca782fde40214cbb2a7adbbd40db1
   m_configObjects: {}

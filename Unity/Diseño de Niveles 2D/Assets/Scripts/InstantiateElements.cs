@@ -10,11 +10,12 @@ public class InstantiateElements : MonoBehaviour
     public GameObject Character;
     private GameObject player;
     Vector3 origen;
+    private bool playerCreated;
 
     private void Start()
     {
         //origen = new Vector3(0, 0, 0);
-
+        playerCreated = false;
     }
 
     public void CreateGameObject(string type)
@@ -24,11 +25,20 @@ public class InstantiateElements : MonoBehaviour
         switch (type)
         {
             case "Character":
-                player = Instantiate(Character);
-                player.transform.position = origen;
+                if (!playerCreated)
+                {
+                    player = Instantiate(Character);
+                    player.transform.parent = GameObject.Find("Canvas").transform;
+                    player.transform.position = origen;
+                    player.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    player.GetComponent<PlayerMovement>().enabled = false;
+                    playerCreated = true;
+                }
+
                 break;
             case "Ground":
                 GameObject suelo = Instantiate(ground);
+                suelo.transform.parent = GameObject.Find("Canvas").transform;
                 suelo.transform.position = origen;
                 break;
         }

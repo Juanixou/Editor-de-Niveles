@@ -13,11 +13,13 @@ public class MoveObject : MonoBehaviour {
 
     private string selection = "Move";
     private Vector3 last_mouse_pos;
+    public bool rotar;
+    public bool escalar;
 
 
     // Use this for initialization
     void Start () {
-
+        
     }
 	
 	// Update is called once per frame
@@ -48,18 +50,24 @@ public class MoveObject : MonoBehaviour {
                 transform.position = curPosition;
                 break;
             case "Rotate":
-                /*Código de Rotación*/
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
+                if (rotar)
+                {
+                    /*Código de Rotación*/
+                    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
 
-                transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((mousePosition.y - transform.position.y), (mousePosition.x - transform.position.x)) * Mathf.Rad2Deg);
+                    transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2((mousePosition.y - transform.position.y), (mousePosition.x - transform.position.x)) * Mathf.Rad2Deg);
+                }
                 break;
             case "Scale":
-                /*Código de Escalado*/
-                Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-                //Se calcula la diferencia entre la posicion anterior y nueva del ratón y se aplica un pequeño offset para poder ajustar bien el tamaño.
-                Vector3 curSize = (curScreenPoint2-last_mouse_pos)*0.01f + new Vector3(GetComponent<SpriteRenderer>().size.x, GetComponent<SpriteRenderer>().size.y,0);
-                GetComponent<SpriteRenderer>().size = curSize;
-                last_mouse_pos = curScreenPoint2;
+                if (escalar)
+                {
+                    /*Código de Escalado*/
+                    Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+                    //Se calcula la diferencia entre la posicion anterior y nueva del ratón y se aplica un pequeño offset para poder ajustar bien el tamaño.
+                    Vector3 curSize = (curScreenPoint2 - last_mouse_pos) * 0.01f + new Vector3(GetComponent<SpriteRenderer>().size.x, GetComponent<SpriteRenderer>().size.y, 0);
+                    GetComponent<SpriteRenderer>().size = curSize;
+                    last_mouse_pos = curScreenPoint2;
+                }
                 break;
             default:
                 break;

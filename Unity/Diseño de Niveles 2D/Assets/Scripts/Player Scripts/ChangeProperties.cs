@@ -28,28 +28,28 @@ public class ChangeProperties : MonoBehaviour
             Debug.Log("PRESIONADO");
             GameObject ventana = windowController.GetComponent<ActivarVentanas>().ActivarVentanaPlayer();
             speed = ventana.transform.Find("Speed").GetComponent<Slider>();
-            jumpForce = ventana.transform.Find("jumpForce").GetComponent<Slider>();
-            jumpPushForce = ventana.transform.Find("jumpPushForce").GetComponent<Slider>();
-            jumpWallForce = ventana.transform.Find("jumpWallForce").GetComponent<Slider>();
+            jumpForce = ventana.transform.Find("JumpForce").GetComponent<Slider>();
+            jumpPushForce = ventana.transform.Find("JumpPushForce").GetComponent<Slider>();
+            jumpWallForce = ventana.transform.Find("JumpWallForce").GetComponent<Slider>();
             ActivarObserver();
         }
     }
 
-    void OnMouseDown()
-    {
+    //void OnMouseDown()
+    //{
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("PRESIONADOOOO!!!");
-            GameObject ventana = windowController.GetComponent<ActivarVentanas>().ActivarVentanaPlayer();
-            speed = ventana.transform.Find("Speed").GetComponent<Slider>();
-            jumpForce = ventana.transform.Find("jumpForce").GetComponent<Slider>();
-            jumpPushForce = ventana.transform.Find("jumpPushForce").GetComponent<Slider>();
-            jumpWallForce = ventana.transform.Find("jumpWallForce").GetComponent<Slider>();
-            ActivarObserver();
-        }
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Debug.Log("PRESIONADOOOO!!!");
+    //        GameObject ventana = windowController.GetComponent<ActivarVentanas>().ActivarVentanaPlayer();
+    //        speed = ventana.transform.Find("Speed").GetComponent<Slider>();
+    //        jumpForce = ventana.transform.Find("jumpForce").GetComponent<Slider>();
+    //        jumpPushForce = ventana.transform.Find("jumpPushForce").GetComponent<Slider>();
+    //        jumpWallForce = ventana.transform.Find("jumpWallForce").GetComponent<Slider>();
+    //        ActivarObserver();
+    //    }
         
-    }
+    //}
 
     public void ActivarObserver()
     {
