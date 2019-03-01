@@ -22,7 +22,7 @@ TagManager:
   - NPC
   - Ground
   - Wall
-  - 
+  - BackGroundLayer
   - 
   - 
   - 
@@ -45,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2160229803
+    locked: 0
+  - name: Elements
+    uniqueID: 463791229
     locked: 0

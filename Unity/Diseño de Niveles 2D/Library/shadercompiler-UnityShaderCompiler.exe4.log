@@ -1,11 +1,3 @@
 Base path: D:/UnityHub/Versiones/2018.3.2f1/Editor/Data
 Cmd: initializeCompiler
-Cmd: disassembleShader
-  api=4 insize=858 outsize=1772 ok=1
-Cmd: disassembleShader
-  api=4 insize=8298 outsize=11191 ok=1
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
 Cmd: initializeCompiler

@@ -41,8 +41,10 @@ public class PlayerStats : MonoBehaviour
     public void Damage(float dmg)
     {
         currentHealth -= dmg;
-        Debug.Log(currentHealth);
-        Debug.Log(currentHealth/maxHealth);
-        healthBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
+        if (currentHealth >= 0)
+        {
+            healthBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
+        }
+
     }
 }

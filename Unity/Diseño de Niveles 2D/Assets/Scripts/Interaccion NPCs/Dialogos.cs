@@ -14,6 +14,7 @@ public class Dialogos : MonoBehaviour {
     private float time;
     private Text texto;
     private bool bloqMov;
+    private GameObject tecla;
 
 	// Use this for initialization
 	void Start () {
@@ -31,15 +32,16 @@ public class Dialogos : MonoBehaviour {
 
         //}
 
-        if (mensaje.active == true && Input.GetKey(KeyCode.Space))
+        if (mensaje.activeSelf == true && Input.GetKey(KeyCode.Space))
         {
             movement.enabled = true;
             mensaje.SetActive(false);
             bloqMov = false;
+            tecla.SetActive(true);
         }
 	}
 
-    public void GestionarDialogo(string nombre)
+    public void GestionarDialogo(string nombre,GameObject tecla)
     {
         //GameObject mensaje = Instantiate(nube, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //mensaje.transform.parent = canvas.transform;
@@ -48,7 +50,7 @@ public class Dialogos : MonoBehaviour {
         switch (nombre)
         {
             case "NPC1":
-                
+                this.tecla = tecla;
                 texto = mensaje.GetComponentInChildren<Text>();
                 texto.text = "Has interactuado con un NPC!";
                 mensaje.SetActive(true);

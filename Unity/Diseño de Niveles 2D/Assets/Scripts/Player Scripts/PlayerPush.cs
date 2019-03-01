@@ -11,7 +11,6 @@ public class PlayerPush : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -23,8 +22,7 @@ public class PlayerPush : MonoBehaviour {
 
         if (hit.collider != null && hit.collider.gameObject.tag == "pushable" && Input.GetKeyDown(KeyCode.E))
         {
-
-
+            Debug.Log("Entró en el if");
             box = hit.collider.gameObject;
             box.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
             box.GetComponent<FixedJoint2D>().enabled = true;

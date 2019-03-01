@@ -11,6 +11,7 @@ public class Colision : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        tecla = this.gameObject.transform.GetChild(0).gameObject;
         gestorTexto = GameObject.Find("ControladorTexto");
         dialog = gestorTexto.GetComponent<Dialogos>();
 	}
@@ -20,8 +21,7 @@ public class Colision : MonoBehaviour {
         if ((colision) && (Input.GetKeyDown(KeyCode.E)))
         {
             tecla.SetActive(false);
-            Debug.Log("Y me llamo " + this.name);
-            dialog.GestionarDialogo(this.name); 
+            dialog.GestionarDialogo(this.name,tecla); 
         }
 	}
 
