@@ -32,6 +32,7 @@ public class InstantiateElements : MonoBehaviour
                     player.transform.position = origen;
                     player.GetComponent<Rigidbody2D>().gravityScale = 0;
                     player.GetComponent<PlayerMovement>().enabled = false;
+                    player.GetComponent<MoveObject>().enabled = true;
                     playerCreated = true;
                 }
 

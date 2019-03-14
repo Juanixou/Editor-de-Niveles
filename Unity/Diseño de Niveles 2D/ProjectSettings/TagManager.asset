@@ -9,6 +9,9 @@ TagManager:
   - Ground
   - pushable
   - Health
+  - Scale
+  - Rotate
+  - iman
   layers:
   - Default
   - TransparentFX

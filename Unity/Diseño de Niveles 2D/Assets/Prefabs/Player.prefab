@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 3327009111867409080}
   - component: {fileID: 2830345443244643752}
   - component: {fileID: 5190637102038722029}
+  - component: {fileID: 3675852628334977941}
+  - component: {fileID: 2282961383743772728}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -58,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 19d0856b025c4dc48bcd9abba964dfb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -226,6 +228,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  healthBar: {fileID: 0}
+--- !u!114 &3675852628334977941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144653208885380601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006597c617110ec4dac0d071518126db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotar: 0
+  escalar: 0
+--- !u!114 &2282961383743772728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144653208885380601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65b32768572356448fef0a8dd2c1c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.0047169924, g: 1, b: 0.07758119, a: 1}
+  outlineSize: 2
 --- !u!1 &2390800271611993905
 GameObject:
   m_ObjectHideFlags: 0

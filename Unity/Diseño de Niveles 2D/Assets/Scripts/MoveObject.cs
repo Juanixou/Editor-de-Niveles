@@ -11,31 +11,39 @@ public class MoveObject : MonoBehaviour {
 
     private Vector3 offsetSize;
 
-    private string selection = "Move";
+    private string selection;
     private Vector3 last_mouse_pos;
     public bool rotar;
     public bool escalar;
+    private bool isMoving;
+    private GameObject[] listaColliders;
 
 
     // Use this for initialization
     void Start () {
-        
+        selection = GameObject.Find("SelectionController").GetComponent<SelectionManager>().transformacion;
+        isMoving = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
     }
 
 
     void OnMouseDown()
     {
+        if (this.tag == "Player")
+        {
+            this.GetComponent<SpriteOutline>().enabled = true;
+        }
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 
         offsetSize =   transform.localScale - offsetSize;
         last_mouse_pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        listaColliders = GameObject.FindGameObjectsWithTag("iman");
+        isMoving = true;
     }
 
     void OnMouseDrag()
@@ -44,6 +52,10 @@ public class MoveObject : MonoBehaviour {
         {
             case "Move":
                 /*Codigo de Traslación*/
+                for(int i = 0; i < listaColliders.Length; i++)
+                {
+                    listaColliders[i].GetComponent<ComportamientoIman>().isMoving = true;
+                }
                 Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
                 Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -52,6 +64,7 @@ public class MoveObject : MonoBehaviour {
             case "Rotate":
                 if (rotar)
                 {
+                    isMoving = false;
                     /*Código de Rotación*/
                     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
 
@@ -61,6 +74,7 @@ public class MoveObject : MonoBehaviour {
             case "Scale":
                 if (escalar)
                 {
+                    isMoving = false;
                     /*Código de Escalado*/
                     Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
                     //Se calcula la diferencia entre la posicion anterior y nueva del ratón y se aplica un pequeño offset para poder ajustar bien el tamaño.
@@ -74,9 +88,23 @@ public class MoveObject : MonoBehaviour {
         }
     }
 
+    public void OnMouseUp()
+    {
+        for (int i = 0; i < listaColliders.Length; i++)
+        {
+            listaColliders[i].GetComponent<ComportamientoIman>().isMoving = false;
+        }
+        if (this.tag == "Player")
+        {
+            this.GetComponent<SpriteOutline>().enabled = false;
+        }
+    }
+
     public void SelectTransform(string tipo)
     {
         selection = tipo;
     }
+
+
 
 }

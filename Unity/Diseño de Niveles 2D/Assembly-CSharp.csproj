@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraFollowPlayer.cs" />
+    <Compile Include="Assets\Scripts\ChangeCursor.cs" />
     <Compile Include="Assets\Scripts\ChangeScene.cs" />
     <Compile Include="Assets\Scripts\ChooseObject.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Scripts\Interaccion NPCs\Colision.cs" />
     <Compile Include="Assets\Scripts\Interaccion NPCs\Dialogos.cs" />
     <Compile Include="Assets\Scripts\Menus\ActivarVentanas.cs" />
+    <Compile Include="Assets\Scripts\Menus\DesactivarVentana.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\MoveObject.cs" />
     <Compile Include="Assets\Scripts\MuerteCaida.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Assets\Scripts\Player Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+    <Compile Include="Assets\Scripts\Transformaciones Objetos\ComportamientoIman.cs" />
     <None Include="Assets\Shaders\Sprites-Outline.shader" />
     <None Include="Assets\Shaders\Contorno.shader" />
     <None Include="Assets\BayatGames\Free Platform Game Assets\Readme.txt" />

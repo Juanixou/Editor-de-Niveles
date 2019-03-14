@@ -45,9 +45,11 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetBool("Correr", false);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space)&&(rb2d.velocity.y>=0))
         {
-            rb2d.AddForce(new Vector2(0, -100));
+            //rb2d.AddForce(new Vector2(0, -(jumpForce - rb2d.velocity.y)));
+            //En cuanto se levanta la tecla de salto, se atenua la velocidad de subida
+            rb2d.velocity = new Vector2(0,0.5f);
         }
 
     }
@@ -116,6 +118,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         anim.SetFloat("vSpeed", rb2d.velocity.y);
+        anim.SetFloat("JumpSpeed", rb2d.velocity.y);
 
         //Parte utilizada para el salto
         if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))

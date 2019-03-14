@@ -93,7 +93,7 @@ public class ChangeScene : MonoBehaviour {
 
     public void Editor()
     {
-        SceneManager.LoadScene("Diseño de Niveles 2D", LoadSceneMode.Single);
+        SceneManager.LoadScene("Editor", LoadSceneMode.Single);
     }
 
     public void GameOver()
