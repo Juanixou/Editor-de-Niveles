@@ -19,25 +19,6 @@ public class ComportamientoIman : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("COLISION");
-        if ((isMoving) && (other.gameObject.tag == "iman"))
-        {
-            Debug.Log("Dentro del collider!");
-            if (this.transform.position.x <= other.transform.position.x)
-            {
-                Debug.Log("Dentro por la izquierda!");
-                this.transform.position = new Vector2(other.transform.position.x - this.GetComponent<SpriteRenderer>().size.x, this.transform.position.y);
-            }
-            else
-            {
-                Debug.Log("Dentro por la izquierda!");
-                this.transform.position = new Vector2(other.transform.position.x + other.gameObject.GetComponent<SpriteRenderer>().size.x, this.transform.position.y);
-            }
-        }
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         Transform padreOtro = other.GetComponentInParent<Transform>();
