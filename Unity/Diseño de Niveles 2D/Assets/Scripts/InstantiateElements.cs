@@ -18,7 +18,7 @@ public class InstantiateElements : MonoBehaviour
         playerCreated = false;
     }
 
-    public void CreateGameObject(string type)
+    public void CreateGameObject(string type, Transform pos)
     {
         origen = Camera.main.transform.position;
         origen.z = 0;
@@ -40,7 +40,7 @@ public class InstantiateElements : MonoBehaviour
             case "Ground":
                 GameObject suelo = Instantiate(ground);
                 suelo.transform.parent = GameObject.Find("Canvas").transform;
-                suelo.transform.position = origen;
+                suelo.transform.position = pos.position;
                 break;
         }
     }

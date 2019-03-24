@@ -10,7 +10,7 @@ public class ComportamientoIman : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        isMoving = false;
     }
 
     // Update is called once per frame
@@ -21,23 +21,32 @@ public class ComportamientoIman : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Transform padreOtro = other.GetComponentInParent<Transform>();
-        Transform padreMio = GetComponentInParent<Transform>();
-        Debug.Log("COLISION");
+        GameObject padreMio = this.transform.parent.gameObject;
+        GameObject padreOtro = other.transform.parent.gameObject;
+        //Transform padreOtro = other.GetComponentInParent<Transform>();
+        //Transform padreMio = GetComponentInParent<Transform>();
         if ((isMoving) && (other.gameObject.tag == "iman"))
         {
-            Debug.Log("Dentro del collider!");
+            padreMio.GetComponent<MoveObject>().enabled = false;
             if (this.transform.position.x <= other.transform.position.x)
             {
-                Debug.Log("Dentro por la izquierda!");
 
-                padreMio.position = new Vector2(padreOtro.position.x - this.GetComponentInParent<SpriteRenderer>().size.x, padreMio.position.y);
+                padreMio.transform.position = new Vector2(padreOtro.transform.position.x - padreMio.GetComponent<SpriteRenderer>().size.x, padreOtro.transform.position.y);
+
+                StartCoroutine(Example(padreMio));
+
             }
             else
             {
-                Debug.Log("Dentro por la izquierda!");
-                padreMio.position = new Vector2(padreOtro.position.x + other.GetComponentInParent<SpriteRenderer>().size.x, padreMio.position.y);
+                padreMio.transform.position = new Vector2(padreOtro.transform.position.x + padreOtro.GetComponent<SpriteRenderer>().size.x, padreOtro.transform.position.y);
+                StartCoroutine(Example(padreMio));
             }
         }
+    }
+
+    IEnumerator Example(GameObject padreMio)
+    {
+        yield return new WaitForSeconds(2);
+        padreMio.GetComponent<MoveObject>().enabled = true;
     }
 }

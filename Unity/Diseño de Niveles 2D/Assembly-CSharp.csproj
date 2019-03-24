@@ -81,6 +81,8 @@
     <Compile Include="Assets\Scripts\ChangeScene.cs" />
     <Compile Include="Assets\Scripts\ChooseObject.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
+    <Compile Include="Assets\Scripts\Enemies Behaviour\BasicEnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\InstanciarArrastrar.cs" />
     <Compile Include="Assets\Scripts\InstantiateElements.cs" />
     <Compile Include="Assets\Scripts\Interaccion NPCs\Colision.cs" />
     <Compile Include="Assets\Scripts\Interaccion NPCs\Dialogos.cs" />

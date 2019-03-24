@@ -16,22 +16,43 @@ public class MoveObject : MonoBehaviour {
     public bool rotar;
     public bool escalar;
     private bool isMoving;
-    private GameObject[] listaColliders;
+    private List<GameObject> listaColliders;
 
 
     // Use this for initialization
     void Start () {
         selection = GameObject.Find("SelectionController").GetComponent<SelectionManager>().transformacion;
         isMoving = false;
+        listaColliders = new List<GameObject>();
     }
 	
 	// Update is called once per frame
 	void Update () {
     }
 
+    private void AddDescendantsWithTag(Transform parent, string tag, List<GameObject> list)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.gameObject.tag == tag)
+            {
+                list.Add(child.gameObject);
+            }
+            //AddDescendantsWithTag(child, tag, list);
+        }
+    }
+
 
     void OnMouseDown()
     {
+        if (!enabled)
+        {
+            return;
+        }
+        else
+        {
+            AddDescendantsWithTag(this.transform, "iman", listaColliders);
+        }
         if (this.tag == "Player")
         {
             this.GetComponent<SpriteOutline>().enabled = true;
@@ -42,19 +63,37 @@ public class MoveObject : MonoBehaviour {
 
         offsetSize =   transform.localScale - offsetSize;
         last_mouse_pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        listaColliders = GameObject.FindGameObjectsWithTag("iman");
         isMoving = true;
     }
 
     void OnMouseDrag()
     {
+        if (!enabled)
+        {
+            return;
+        }
+        else
+        {
+            foreach(GameObject iman in listaColliders)
+            {
+                iman.GetComponentInChildren<ComportamientoIman>().enabled = false;
+                StartCoroutine(WaitToActive(iman));
+            }
+
+        }
         switch (selection)
         {
             case "Move":
                 /*Codigo de Traslación*/
+                /*
                 for(int i = 0; i < listaColliders.Length; i++)
                 {
                     listaColliders[i].GetComponent<ComportamientoIman>().isMoving = true;
+                }
+                */
+                foreach (GameObject iman in listaColliders)
+                {
+                    iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
                 }
                 Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
@@ -90,9 +129,9 @@ public class MoveObject : MonoBehaviour {
 
     public void OnMouseUp()
     {
-        for (int i = 0; i < listaColliders.Length; i++)
+        foreach (GameObject iman in listaColliders)
         {
-            listaColliders[i].GetComponent<ComportamientoIman>().isMoving = false;
+            iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
         }
         if (this.tag == "Player")
         {
@@ -105,6 +144,10 @@ public class MoveObject : MonoBehaviour {
         selection = tipo;
     }
 
-
+    IEnumerator WaitToActive(GameObject iman)
+    {
+        yield return new WaitForSeconds(2);
+        iman.GetComponentInChildren<ComportamientoIman>().enabled = true;
+    }
 
 }

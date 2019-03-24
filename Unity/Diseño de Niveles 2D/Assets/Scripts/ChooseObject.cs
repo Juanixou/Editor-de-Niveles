@@ -11,7 +11,7 @@ public class ChooseObject : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         controlador = GameObject.Find("InstancesController");
-        instanciar = controlador.GetComponent<InstantiateElements>();
+       // instanciar = controlador.GetComponent<InstantiateElements>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -26,7 +26,7 @@ public class ChooseObject : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            instanciar.CreateGameObject(this.name);
+            //instanciar.CreateGameObject(this.name, this.transform);
         }
  
     }
