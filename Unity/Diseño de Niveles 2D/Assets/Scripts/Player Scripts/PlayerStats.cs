@@ -44,7 +44,9 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth >= 0)
         {
             healthBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
+            
         }
 
     }
+
 }

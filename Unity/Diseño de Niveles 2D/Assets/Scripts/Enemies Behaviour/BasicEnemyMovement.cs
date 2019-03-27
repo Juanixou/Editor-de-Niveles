@@ -6,9 +6,11 @@ public class BasicEnemyMovement : MonoBehaviour
 {
 
     public float minDistance = 50.0f;
-    public float maxDistance = 100.0f;
+    public float maxDistance = 500.0f;
     private float actualDistance;
     private bool dcha;
+    private GameObject personaje;
+    public GameObject healthBar;
 
     private Animator anim;
 
@@ -19,6 +21,14 @@ public class BasicEnemyMovement : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         anim.SetBool("Walking", true);
         actualDistance = minDistance;
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            if (this.transform.GetChild(i).name == "Animation")
+            {
+
+                personaje = this.transform.GetChild(i).gameObject;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -26,19 +36,31 @@ public class BasicEnemyMovement : MonoBehaviour
     {
         if(dcha)
         {
-            this.transform.Translate(new Vector2(1.0f, this.transform.position.y));
-            actualDistance++;
+            this.transform.position= new Vector2(this.transform.position.x + 0.01f, this.transform.position.y);
+            actualDistance+=0.1f;
             if(actualDistance >= maxDistance)
             {
+                this.transform.Rotate(new Vector2(0, 180));
+                healthBar.transform.Rotate(new Vector2(0, -180));
+                for(int i = 0; i < healthBar.transform.childCount;i++)
+                {
+                    healthBar.transform.GetChild(i).transform.Rotate(new Vector2(0, -180));
+                }
                 dcha = false;
             }
         }
         else
         {
-            this.transform.Translate(new Vector2(-1.0f, this.transform.position.y));
-            actualDistance--;
+            this.transform.position = new Vector2(this.transform.position.x - 0.01f, this.transform.position.y);
+            actualDistance -= 0.1f ;
             if (actualDistance <= minDistance)
             {
+                this.transform.Rotate(new Vector2(0, 180));
+                healthBar.transform.Rotate(new Vector2(0, -180));
+                for (int i = 0; i < healthBar.transform.childCount;i++)
+                {
+                    healthBar.transform.GetChild(i).transform.Rotate(new Vector2(0, -180));
+                }
                 dcha = true;
             }
         }

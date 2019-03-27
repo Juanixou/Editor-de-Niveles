@@ -11,6 +11,7 @@ public class ChangeScene : MonoBehaviour {
     // Use this for initialization
     void Start () {
         escena = SceneManager.GetActiveScene();
+        if(this.gameObject.transform.GetChild(0).gameObject!=null)
         tecla = this.gameObject.transform.GetChild(0).gameObject;
 	}
 	

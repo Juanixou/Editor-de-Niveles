@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start () {
         caminando = false;
         rb2d = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
 	}
 	
 	// Update is called once per frame

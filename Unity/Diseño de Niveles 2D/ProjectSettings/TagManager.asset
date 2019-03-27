@@ -12,6 +12,7 @@ TagManager:
   - Scale
   - Rotate
   - iman
+  - Enemy
   layers:
   - Default
   - TransparentFX
