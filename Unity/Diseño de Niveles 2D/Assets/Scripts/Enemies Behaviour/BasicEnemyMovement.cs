@@ -40,12 +40,7 @@ public class BasicEnemyMovement : MonoBehaviour
             actualDistance+=0.1f;
             if(actualDistance >= maxDistance)
             {
-                this.transform.Rotate(new Vector2(0, 180));
-                healthBar.transform.Rotate(new Vector2(0, -180));
-                for(int i = 0; i < healthBar.transform.childCount;i++)
-                {
-                    healthBar.transform.GetChild(i).transform.Rotate(new Vector2(0, -180));
-                }
+                personaje.transform.Rotate(new Vector2(0, 180));
                 dcha = false;
             }
         }
@@ -55,12 +50,7 @@ public class BasicEnemyMovement : MonoBehaviour
             actualDistance -= 0.1f ;
             if (actualDistance <= minDistance)
             {
-                this.transform.Rotate(new Vector2(0, 180));
-                healthBar.transform.Rotate(new Vector2(0, -180));
-                for (int i = 0; i < healthBar.transform.childCount;i++)
-                {
-                    healthBar.transform.GetChild(i).transform.Rotate(new Vector2(0, -180));
-                }
+                personaje.transform.Rotate(new Vector2(0, 180));
                 dcha = true;
             }
         }

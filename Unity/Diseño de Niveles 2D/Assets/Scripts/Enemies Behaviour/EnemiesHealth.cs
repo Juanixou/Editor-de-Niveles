@@ -70,6 +70,8 @@ public class EnemiesHealth : MonoBehaviour
     {
         //anim.SetBool("Muerte", true);
         anim.Play("Die");
+        healthBar.transform.parent.transform.gameObject.SetActive(false);
+        this.GetComponent<Damage>().enabled = false;
         yield return new WaitForSeconds(5);
         Death();
     }
