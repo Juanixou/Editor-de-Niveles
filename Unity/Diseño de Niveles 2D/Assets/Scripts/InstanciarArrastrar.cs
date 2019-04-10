@@ -15,10 +15,13 @@ public class InstanciarArrastrar : MonoBehaviour
     private Vector3 last_mouse_pos;
     private bool playerCreated;
 
+    //Variables Guardado
+    SaveGround saver;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        saver = GameObject.Find("DataController").GetComponent<SaveGround>();
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class InstanciarArrastrar : MonoBehaviour
             instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
             instancia.transform.parent = GameObject.Find("Canvas").transform;
             instancia.transform.position = this.transform.position;
+            saver.InsertGround(instancia);
         }
 
         screenPoint = Camera.main.WorldToScreenPoint(instancia.gameObject.transform.position);
@@ -64,4 +68,10 @@ public class InstanciarArrastrar : MonoBehaviour
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         instancia.transform.position = curPosition;
     }
+
+    public void GuardarSuelo()
+    {
+
+    }
+
 }

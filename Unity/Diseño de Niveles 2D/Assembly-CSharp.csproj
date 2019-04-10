@@ -99,6 +99,9 @@
     <Compile Include="Assets\Scripts\Player Scripts\PlayerPhysics.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerPush.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Save Files\GroundData.cs" />
+    <Compile Include="Assets\Scripts\Save Files\JsonHelper.cs" />
+    <Compile Include="Assets\Scripts\Save Files\SaveGround.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
     <Compile Include="Assets\Scripts\Transformaciones Objetos\ComportamientoIman.cs" />

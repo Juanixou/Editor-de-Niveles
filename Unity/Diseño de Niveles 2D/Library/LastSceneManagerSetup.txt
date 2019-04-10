@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Basic Enemy Trial.unity
+- path: Assets/Scenes/Jump Trial.unity
   isLoaded: 1
   isActive: 1

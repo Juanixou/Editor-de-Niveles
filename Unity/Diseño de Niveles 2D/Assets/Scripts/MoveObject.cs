@@ -91,6 +91,7 @@ public class MoveObject : MonoBehaviour {
                     listaColliders[i].GetComponent<ComportamientoIman>().isMoving = true;
                 }
                 */
+
                 foreach (GameObject iman in listaColliders)
                 {
                     iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;

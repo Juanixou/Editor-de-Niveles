@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 61325090545050640}
   - component: {fileID: 50809076633956796}
   - component: {fileID: 6858615152215862931}
-  - component: {fileID: 6642840719885689201}
   m_Layer: 0
   m_Name: Suelo_Tile
   m_TagString: Ground
@@ -146,20 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotar: 1
   escalar: 1
---- !u!114 &6642840719885689201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216771360516100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b65b32768572356448fef0a8dd2c1c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.8553834, b: 1, a: 1}
-  outlineSize: 1
 --- !u!1 &989367138912583257
 GameObject:
   m_ObjectHideFlags: 0

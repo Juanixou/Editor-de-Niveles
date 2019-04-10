@@ -116,9 +116,12 @@ public class PlayerMovement : MonoBehaviour {
             grounded = false;
             doubleJump = false;
         }
+        if (rb2d.velocity.y <= 15.0f || rb2d.velocity.y >= -12.0f)
+        {
+            anim.SetFloat("vSpeed", rb2d.velocity.y);
+            anim.SetFloat("JumpSpeed", rb2d.velocity.y);
+        }
 
-        anim.SetFloat("vSpeed", rb2d.velocity.y);
-        anim.SetFloat("JumpSpeed", rb2d.velocity.y);
 
         //Parte utilizada para el salto
         if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
@@ -144,24 +147,5 @@ public class PlayerMovement : MonoBehaviour {
     {
         rb2d.AddForce(new Vector2(jumpPushForce, jumpWallForce));
     }
-
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.collider.name == "Pared")
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Space))
-    //        {
-    //            if (moveHorizontal >= 0)
-    //            {
-    //                rb2d.AddForce(new Vector2(-900, jumpForce));
-    //            }
-    //            else
-    //            {
-    //                rb2d.AddForce(new Vector2(900, jumpForce));
-    //            }
-    //        }
-    //    }
-    //}
-
 
 }
