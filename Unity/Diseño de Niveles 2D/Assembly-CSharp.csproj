@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\Save Files\SaveGround.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+    <Compile Include="Assets\Scripts\States\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Transformaciones Objetos\ComportamientoIman.cs" />
     <Compile Include="Assets\Scripts\Weapon's Scripts\Melee\MeleeDamage.cs" />
     <None Include="Assets\Shaders\Sprites-Outline.shader" />

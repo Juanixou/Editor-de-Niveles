@@ -13,6 +13,7 @@ TagManager:
   - Rotate
   - iman
   - Enemy
+  - Objects
   layers:
   - Default
   - TransparentFX

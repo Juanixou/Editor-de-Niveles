@@ -9,6 +9,7 @@ public class InstanciarArrastrar : MonoBehaviour
     private Vector3 offset;
 
     GameObject instancia;
+    public GameObject ventanaEstados;
 
     private Vector3 offsetSize;
 
@@ -21,6 +22,7 @@ public class InstanciarArrastrar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ventanaEstados = GameObject.Find("StateController");
         saver = GameObject.Find("DataController").GetComponent<SaveGround>();
     }
 
@@ -47,6 +49,10 @@ public class InstanciarArrastrar : MonoBehaviour
         }
         else
         {
+            if (this.name == "Puerta")
+            {
+                ventanaEstados.GetComponent<StateMachine>().ActivarEstados();
+            }
             instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
             instancia.transform.parent = GameObject.Find("Canvas").transform;
             instancia.transform.position = this.transform.position;
