@@ -101,4 +101,9 @@ public class ChangeScene : MonoBehaviour {
     {
         SceneManager.LoadScene("Game Over", LoadSceneMode.Single);
     }
+
+    public void SeleccionEditor()
+    {
+        SceneManager.LoadScene("Crear-Cargar", LoadSceneMode.Single);
+    }
 }

@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CargaInicial.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\AnimationEvents.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\AnimationManager.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\Character.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Assets\Scripts\Save Files\SaveGround.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+    <Compile Include="Assets\Scripts\States\SelectLevel.cs" />
     <Compile Include="Assets\Scripts\States\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Transformaciones Objetos\ComportamientoIman.cs" />
     <Compile Include="Assets\Scripts\Weapon's Scripts\Melee\MeleeDamage.cs" />

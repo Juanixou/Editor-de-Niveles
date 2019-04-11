@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Over.unity
     guid: 163ca782fde40214cbb2a7adbbd40db1
+  - enabled: 1
+    path: Assets/Scenes/Basic Enemy Trial.unity
+    guid: 055a4f6d39da34c4196441cb8e1afdc3
+  - enabled: 1
+    path: Assets/Scenes/Crear-Cargar.unity
+    guid: 720b2bc962d846e4ba36a06aa36a943a
   m_configObjects: {}

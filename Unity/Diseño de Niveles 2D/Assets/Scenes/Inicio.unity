@@ -610,7 +610,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 230507790}
-        m_MethodName: Editor
+        m_MethodName: SeleccionEditor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
