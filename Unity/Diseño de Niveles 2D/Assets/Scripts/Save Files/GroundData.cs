@@ -7,16 +7,18 @@ using System;
 public class GroundData
 {
     public string groundName;
+    public int id;
     public Vector3 position;
     public Vector3 rotation;
     public Vector3 scale;
 
-    public GroundData(string groundName,Transform transformComponent)
+    public GroundData(string groundName,Transform transformComponent, int id)
     {
         this.groundName = groundName.Replace("(Clone)","");
         this.position = transformComponent.position;
         this.rotation = transformComponent.rotation.eulerAngles;
         this.scale = transformComponent.localScale;
+        this.id = id;
     }
     
     public string GroundName { get; set; }

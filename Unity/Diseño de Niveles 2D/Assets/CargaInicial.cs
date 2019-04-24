@@ -9,9 +9,10 @@ public class CargaInicial : MonoBehaviour
     void Start()
     {
         controladorDatos = GameObject.Find("DataController");
-        if (SelectLevel.path != null)
+        if (PlayerPrefs.GetString("path") != "")
         {
-            controladorDatos.GetComponent<SaveGround>().dataPath = SelectLevel.path;
+            controladorDatos.GetComponent<SaveGround>().dataPath = PlayerPrefs.GetString("path");
+            PlayerPrefs.SetString("path", "");
             controladorDatos.GetComponent<SaveGround>().LoadData();
         }
     }

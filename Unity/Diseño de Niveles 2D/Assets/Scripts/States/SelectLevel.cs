@@ -7,10 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class SelectLevel : MonoBehaviour
 {
-    public static string path;
-    public static void ElegirArchivo()
+    public string path;
+    public void ElegirArchivo()
     {
         path = EditorUtility.OpenFilePanel("Select Level", Application.persistentDataPath, "txt");
-        SceneManager.LoadScene("Editor", LoadSceneMode.Single);
+        PlayerPrefs.SetString("path", path);
+        if (path != "")
+        {
+            SceneManager.LoadScene("Editor", LoadSceneMode.Single);
+        }
+
     }
 }

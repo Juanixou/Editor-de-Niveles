@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 212651200726928814}
   - component: {fileID: 61876322099734772}
   - component: {fileID: 114739654436497878}
+  - component: {fileID: 3177653132395015722}
   m_Layer: 0
   m_Name: Puerta
   m_TagString: Untagged
@@ -121,6 +122,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tecla: {fileID: 0}
+  id: 0
+--- !u!114 &3177653132395015722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115569535167286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006597c617110ec4dac0d071518126db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotar: 0
+  escalar: 0
 --- !u!1001 &6089039082624071067
 PrefabInstance:
   m_ObjectHideFlags: 0
