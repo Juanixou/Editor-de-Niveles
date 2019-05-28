@@ -30,17 +30,39 @@ public class ComportamientoIman : MonoBehaviour
             padreMio.GetComponent<MoveObject>().enabled = false;
             if (this.transform.position.x <= other.transform.position.x)
             {
-
-                padreMio.transform.position = new Vector2(padreOtro.transform.position.x - padreMio.GetComponent<SpriteRenderer>().size.x, padreOtro.transform.position.y);
+                float y;
+                float x = padreOtro.transform.position.x - padreMio.GetComponent<SpriteRenderer>().size.x;
+                if (padreOtro.transform.rotation.z != 0)
+                {
+                    y = padreMio.transform.position.y;
+                }
+                else
+                {
+                    y = padreOtro.transform.position.y;
+                }
+                Vector2 pos = transform.TransformPoint(other.transform.position);
+                padreMio.transform.position = new Vector2(x, padreOtro.transform.position.y );
 
                 StartCoroutine(Example(padreMio));
 
             }
             else
             {
-                padreMio.transform.position = new Vector2(padreOtro.transform.position.x + padreOtro.GetComponent<SpriteRenderer>().size.x, padreOtro.transform.position.y);
+                float x = padreOtro.transform.position.x + padreOtro.GetComponent<SpriteRenderer>().size.x;
+                float y;
+                if (padreOtro.transform.rotation.z != 0)
+                {
+                    y = padreMio.transform.position.y;
+                }
+                else
+                {
+                    y = padreOtro.transform.position.y;
+                }
+                Vector2 pos = transform.TransformPoint(other.transform.position);
+                padreMio.transform.position = new Vector2(x, padreOtro.transform.position.y);
                 StartCoroutine(Example(padreMio));
             }
+
         }
     }
 

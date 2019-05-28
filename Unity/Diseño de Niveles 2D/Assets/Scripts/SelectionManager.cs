@@ -10,11 +10,13 @@ public class SelectionManager : MonoBehaviour {
     public string transformacion;
     public GameObject play;
     public GameObject pause;
+    Transform canvas;
 
     // Use this for initialization
     void Start () {
         transformacion = "Move";
-	}
+        canvas = GameObject.Find("Canvas").transform;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,10 +25,13 @@ public class SelectionManager : MonoBehaviour {
 
     public void Selection()
     {
-        instancias = GameObject.FindGameObjectsWithTag("Ground");
-        foreach (GameObject instancias in instancias){
-            instancias.GetComponent<MoveObject>().SelectTransform(EventSystem.current.currentSelectedGameObject.name);
-            
+
+        foreach (Transform instancias in canvas)
+        {
+            if (instancias.gameObject.name.Contains("Clone"))
+            {
+                instancias.GetComponent<MoveObject>().SelectTransform(EventSystem.current.currentSelectedGameObject.name);
+            } 
         }
         transformacion = EventSystem.current.currentSelectedGameObject.name;
     }

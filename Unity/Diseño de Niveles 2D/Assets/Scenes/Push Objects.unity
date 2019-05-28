@@ -153,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4934128252492768, guid: 3609949ba79176341bf918fe860783e0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4934128252492768, guid: 3609949ba79176341bf918fe860783e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -480,7 +480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042897267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -103.3, y: -352.6, z: -4455}
+  m_LocalPosition: {x: -245.33, y: -352.6, z: -1}
   m_LocalScale: {x: 102.9996, y: 109.18315, z: 49.5}
   m_Children: []
   m_Father: {fileID: 1413232557}
@@ -514,12 +514,12 @@ FixedJoint2D:
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 1802552522}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.7474748, y: -2.4579127}
+  m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!61 &1042897274
@@ -531,7 +531,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1042897267}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 0cb77231a430b454fb792ff7ffcc3943, type: 2}
+  m_Material: {fileID: 6200000, guid: 8be6341e1ce3f4cec9902bc34f72d20a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -702,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 7835816168975309970, guid: 4e5d28a050ba5df41acbea968c842c17,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7835816168975309970, guid: 4e5d28a050ba5df41acbea968c842c17,
         type: 3}
@@ -798,7 +798,13 @@ MonoBehaviour:
   distance: 0.01
   boxMask:
     serializedVersion: 2
-    m_Bits: 3639
+    m_Bits: 7735
+--- !u!50 &1802552522 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4048348354270895699, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe,
+    type: 3}
+  m_PrefabInstance: {fileID: 2106377440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1873952427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -840,7 +846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4934128252492768, guid: 3609949ba79176341bf918fe860783e0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4934128252492768, guid: 3609949ba79176341bf918fe860783e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -988,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1538372020, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4455
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1538372020, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1008,7 +1014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1538372020, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1538372020, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1034,6 +1040,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 296248882023435345, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 0cb77231a430b454fb792ff7ffcc3943, type: 2}
+    - target: {fileID: 7550092658760394632, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 0cb77231a430b454fb792ff7ffcc3943, type: 2}
     - target: {fileID: 2830345443244643752, guid: e71d7f0f2ab30ae4ba64faf94ddf8bbe,
         type: 3}
       propertyPath: m_Enabled

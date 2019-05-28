@@ -15,6 +15,7 @@ public class InstanciarArrastrar : MonoBehaviour
 
     private Vector3 last_mouse_pos;
     private bool playerCreated;
+    private List<GameObject> listaColliders;
 
     //Variables Guardado
     GameObject saver;
@@ -24,6 +25,7 @@ public class InstanciarArrastrar : MonoBehaviour
     {
         ventanaEstados = GameObject.Find("StateController");
         saver = GameObject.Find("DataController");
+        listaColliders = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -37,13 +39,13 @@ public class InstanciarArrastrar : MonoBehaviour
         switch (this.name)
         {
             //Para el jugador
-            case "Player":
+            case "Character_1":
                 //Si no se ha creado aún, lo instanciamos
                 if (!playerCreated)
                 {
                     //Instanciamos, hacemos hijo del canvas y actualizamos datos para no poder controlarlo por teclado.
                     instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                    instancia.transform.parent = GameObject.Find("Canvas").transform;
+                    instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
                     instancia.transform.position = this.transform.position;
                     instancia.GetComponent<Rigidbody2D>().gravityScale = 0;
                     instancia.GetComponent<PlayerMovement>().enabled = false;
@@ -58,7 +60,7 @@ public class InstanciarArrastrar : MonoBehaviour
                 int id = ventanaEstados.GetComponent<StateMachine>().ActivarEstados();
                 //Instanciamos, hacemos hijo del canvas, creamos un id para el futuro y lo metemos en la lista de serialización.
                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                instancia.transform.parent = GameObject.Find("Canvas").transform;
+                instancia.transform.parent=GameObject.Find("Canvas").transform;
                 instancia.transform.position = this.transform.position;
                 instancia.GetComponent<ChangeScene>().id = id;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
@@ -66,14 +68,27 @@ public class InstanciarArrastrar : MonoBehaviour
                 break;
 
             //Para el suelo
-            case "Suelo_Tile":
+            case "Suelo_1":
+            case "Suelo_2":
+            case "Suelo_3":
                 //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
                 instancia.transform.parent = GameObject.Find("Canvas").transform;
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
+                AddDescendantsWithTag(instancia.transform, "iman", listaColliders);
+                foreach (GameObject iman in listaColliders)
+                {
+                    iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
+                }
                 break;
-
+            case "Espinas":
+                //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
+                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
+                instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                instancia.transform.position = this.transform.position;
+                saver.GetComponent<SaveGround>().InsertGround(instancia);
+                break;
             default:
                 break;
 
@@ -91,5 +106,25 @@ public class InstanciarArrastrar : MonoBehaviour
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         instancia.transform.position = curPosition;
+    }
+
+    void OnMouseUp()
+    {
+        instancia.transform.Find("Marco").GetComponent<SpriteRenderer>().enabled = false;
+        foreach (GameObject iman in listaColliders)
+        {
+            iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
+        }
+    }
+
+    private void AddDescendantsWithTag(Transform parent, string tag, List<GameObject> list)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.gameObject.tag == tag)
+            {
+                list.Add(child.gameObject);
+            }
+        }
     }
 }

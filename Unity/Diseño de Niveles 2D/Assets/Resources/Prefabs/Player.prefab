@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5190637102038722029}
   - component: {fileID: 3675852628334977941}
   - component: {fileID: 2282961383743772728}
+  - component: {fileID: 6108238374234911328}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -34,7 +35,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144653208885380601}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -404, y: -165, z: 0}
+  m_LocalPosition: {x: -403.951, y: -164.967, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 778291247767805024}
@@ -257,6 +258,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0.0047169924, g: 1, b: 0.07758119, a: 1}
   outlineSize: 2
+--- !u!114 &6108238374234911328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144653208885380601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 10, y: -10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2390800271611993905
 GameObject:
   m_ObjectHideFlags: 0

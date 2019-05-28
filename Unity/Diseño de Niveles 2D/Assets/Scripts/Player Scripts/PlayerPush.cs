@@ -24,6 +24,7 @@ public class PlayerPush : MonoBehaviour {
         {
             Debug.Log("Entró en el if");
             box = hit.collider.gameObject;
+            Debug.Log(box.name);
             box.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
             box.GetComponent<FixedJoint2D>().enabled = true;
             box.GetComponent<BoxPull>().beingPushed = true;

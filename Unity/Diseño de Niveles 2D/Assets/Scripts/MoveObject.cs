@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MoveObject : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class MoveObject : MonoBehaviour {
     public bool escalar;
     private bool isMoving;
     private List<GameObject> listaColliders;
+    private SpriteRenderer outln;
 
 
     // Use this for initialization
@@ -24,6 +26,7 @@ public class MoveObject : MonoBehaviour {
         selection = GameObject.Find("SelectionController").GetComponent<SelectionManager>().transformacion;
         isMoving = false;
         listaColliders = new List<GameObject>();
+        
     }
 	
 	// Update is called once per frame
@@ -37,6 +40,10 @@ public class MoveObject : MonoBehaviour {
             if (child.gameObject.tag == tag)
             {
                 list.Add(child.gameObject);
+            }
+            else if (this.tag=="Ground")
+            {
+                outln = child.gameObject.GetComponent<SpriteRenderer>();
             }
             //AddDescendantsWithTag(child, tag, list);
         }
@@ -55,8 +62,11 @@ public class MoveObject : MonoBehaviour {
         }
         if (this.tag == "Player")
         {
-            this.GetComponent<SpriteOutline>().enabled = true;
+            //outln.enabled = true;
+            //this.GetComponent<SpriteOutline>().enabled = true;
+            Debug.Log("AÑADIR SHADER PARA SELECCION DE PERSONAJE SPRITE OUTLINE");
         }
+        
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
@@ -64,10 +74,15 @@ public class MoveObject : MonoBehaviour {
         offsetSize =   transform.localScale - offsetSize;
         last_mouse_pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         isMoving = true;
+        if (outln != null)
+        {
+            outln.enabled = true;
+        }
     }
 
     void OnMouseDrag()
     {
+        Debug.Log(selection);
         if (!enabled)
         {
             return;
@@ -84,13 +99,6 @@ public class MoveObject : MonoBehaviour {
         switch (selection)
         {
             case "Move":
-                /*Codigo de Traslación*/
-                /*
-                for(int i = 0; i < listaColliders.Length; i++)
-                {
-                    listaColliders[i].GetComponent<ComportamientoIman>().isMoving = true;
-                }
-                */
 
                 foreach (GameObject iman in listaColliders)
                 {
@@ -138,6 +146,7 @@ public class MoveObject : MonoBehaviour {
         {
             this.GetComponent<SpriteOutline>().enabled = false;
         }
+        outln.enabled = false;
     }
 
     public void SelectTransform(string tipo)
