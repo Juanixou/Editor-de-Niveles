@@ -110,7 +110,12 @@ public class InstanciarArrastrar : MonoBehaviour
 
     void OnMouseUp()
     {
-        instancia.transform.Find("Marco").GetComponent<SpriteRenderer>().enabled = false;
+        SpriteRenderer obj = instancia.transform.Find("Marco").GetComponent<SpriteRenderer>();
+
+        if (obj != null)
+        {
+            obj.enabled = false;
+        }
         foreach (GameObject iman in listaColliders)
         {
             iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
