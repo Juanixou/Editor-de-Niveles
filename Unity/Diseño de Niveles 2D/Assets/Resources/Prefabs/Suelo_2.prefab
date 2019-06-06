@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 50809076633956796}
   - component: {fileID: 6858615152215862931}
   - component: {fileID: 6642840719885689201}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Suelo_2
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3415474676712105971}
   - component: {fileID: 1194080517704983479}
   - component: {fileID: 9195979101984312443}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ImanDcho
   m_TagString: iman
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 1625254922261747823}
   - component: {fileID: 2553339523034610445}
   - component: {fileID: 4847565023373680615}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ImanIzqd
   m_TagString: iman
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1125081298763256939}
   - component: {fileID: 4423603529487509984}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: Marco
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -372,8 +372,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3318277466396337552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.24, y: -0.25, z: 0}
-  m_LocalScale: {x: 1.7960299, y: 0.7998722, z: 1}
+  m_LocalPosition: {x: -2.2777, y: -0.2736, z: 0}
+  m_LocalScale: {x: 1.8187232, y: 0.8753371, z: 1}
   m_Children: []
   m_Father: {fileID: 4934128252492768}
   m_RootOrder: 2
@@ -395,7 +395,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd815e93eb8ae1748925b9a45c9e3643, type: 2}
+  - {fileID: 2100000, guid: 153a219529fd31a4ea8aa3a7d73b22b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

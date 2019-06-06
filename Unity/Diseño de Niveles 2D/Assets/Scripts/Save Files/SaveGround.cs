@@ -14,6 +14,7 @@ public class SaveGround : MonoBehaviour
     public List<GroundData> listaSuelos;
     public List<DoorData> listaPuertas;
     public string dataPath;
+    public GameObject stateMachine;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class SaveGround : MonoBehaviour
         loaded = false;
         listaObjetos = new List<GameObject>();
         listaSuelos = new List<GroundData>();
+        stateMachine = GameObject.Find("StateController");
 
     }
 
@@ -46,7 +48,7 @@ public class SaveGround : MonoBehaviour
     {
         int contadorPuertas = 0;
         //Comprobamos si hay ruta establecida
-        ActualizarRuta();
+        ActualizarRuta(null);
         
         //Recorremos la lista de instancias y las almacenamos en su lista correspondiente
         foreach (GameObject item in listaObjetos)
@@ -156,6 +158,7 @@ public class SaveGround : MonoBehaviour
 
                                 puertas = JsonHelper.FromJson<DoorData>(jsonString);
                             }
+                            stateMachine.GetComponent<StateMachine>().count = 0;
                             //Una vez leido el fichero, se instancian todas las puertas en la escena
                             for (int i = 0; i < puertas.Length; i++)
                             {
@@ -164,6 +167,8 @@ public class SaveGround : MonoBehaviour
                                 instancia.transform.position = puertas[i].position;
                                 instancia.GetComponent<ChangeScene>().id = puertas[i].id;
                                 listaPuertas.Add(puertas[i]);
+
+                                stateMachine.GetComponent<StateMachine>().ActivarEstadosCarga(puertas[i].userDoorName, puertas[i].postDoorName);
                             }
                             break;
 
@@ -179,28 +184,42 @@ public class SaveGround : MonoBehaviour
 
     }
 
-    public void ActualizarRuta()
+    public void ActualizarRuta(string name)
     {
         //Si la ruta está vacía porque es un nuevo nivel, se pregunta por el nombre del nivel
-        if (dataPath == "")
+        if (name == null)
         {
-            //Se decide el nombre y se crea el directorio
-            dataPath = EditorUtility.SaveFilePanel("Select Level Name", Application.persistentDataPath, "", "");
-            //dataPath = Path.Combine(Application.persistentDataPath, "GroundData.txt");
-            Directory.CreateDirectory(dataPath);
+            if (dataPath == "")
+            {
+                //Se decide el nombre y se crea el directorio
+                dataPath = EditorUtility.SaveFilePanel("Select Level Name", Application.persistentDataPath, "", "");
+                //dataPath = Path.Combine(Application.persistentDataPath, "GroundData.txt");
+                Directory.CreateDirectory(dataPath);
 
+            }
         }
+        else
+        {
+            dataPath = name;
+        }
+
     }
 
-    public void ActualizarDatosPuerta(int idPuertaActual, int idPuertaNueva, string rutaNivel)
+    public void ActualizarDatosPuerta(int idPuertaActual, int idPuertaNueva, string rutaNivel, string name, string postName)
     {
 
         foreach(DoorData door in listaPuertas)
         {
             if (door.id == idPuertaActual)
             {
+                Debug.Log("Actualizando datos puerta");
                 door.postId=idPuertaNueva;
                 door.postScene = rutaNivel;
+                door.userDoorName = name;
+                if (postName != null)
+                {
+                    door.postDoorName = postName;
+                }
             }
         }
     }

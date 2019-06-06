@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 61325090545050640}
   - component: {fileID: 50809076633956796}
   - component: {fileID: 6858615152215862931}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: Suelo_1
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216771360516100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.044, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8793425152456286207}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_DrawMode: 2
   m_Size: {x: 4.431193, y: 0.44340318}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -100,13 +100,13 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.39999998}
+    border: {x: 0, y: 0, z: 0, w: 0.625}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 4.431193, y: 0.44340318}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
-    adaptiveTiling: 0
+    adaptiveTiling: 1
   m_AutoTiling: 1
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 3415474676712105971}
   - component: {fileID: 1194080517704983479}
   - component: {fileID: 9195979101984312443}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: ImanDcho
   m_TagString: iman
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1625254922261747823}
   - component: {fileID: 2553339523034610445}
   - component: {fileID: 4847565023373680615}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: ImanIzqd
   m_TagString: iman
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8313038789402033634}
   - component: {fileID: 7209669221686672373}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: Marco
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -357,8 +357,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4680728189055605813}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.241, y: -0.238, z: 0}
-  m_LocalScale: {x: 1.7960306, y: 0.7697, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.573236, y: 0.5799109, z: 1}
   m_Children: []
   m_Father: {fileID: 4934128252492768}
   m_RootOrder: 2
@@ -400,7 +400,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d90a8faf6fb9540b084ef2825cc3a5dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 223ae4e9dcf5c2a46bb96a2a48e99b74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

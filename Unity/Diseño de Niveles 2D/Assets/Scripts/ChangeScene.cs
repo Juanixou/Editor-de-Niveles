@@ -11,6 +11,7 @@ public class ChangeScene : MonoBehaviour {
     public GameObject player;
     public int id;
     private bool colision;
+    private bool pushed=false;
 
     public GameObject dataController;
     void Start () {
@@ -46,8 +47,9 @@ public class ChangeScene : MonoBehaviour {
     {
         if ((other.tag == "Player"))
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E)&&!pushed)
             {
+                pushed = true;
                 CambiarEscena();
             }
         }
@@ -115,6 +117,7 @@ public class ChangeScene : MonoBehaviour {
 
     public void LoadScene()
     {
+        Debug.Log("Cargando Escena");
         string newPath = "";
         int nextId = -1;
         Vector3 playerPos = new Vector3(0,0,0);
@@ -138,10 +141,12 @@ public class ChangeScene : MonoBehaviour {
         }
         if (nextId != -1)
         {
-                GameObject instancia;
+            GameObject instancia;
             //Eliminamos todos los objetos creados en la escena para cargar un nuevo nivel
-                dataPath = newPath;
-                foreach (Transform child in GameObject.Find("Canvas").transform)
+            dataPath = newPath;
+            
+
+            foreach (Transform child in GameObject.Find("Canvas").transform)
                 {
                     if (child.name.Contains("(Clone)"))
                     {
@@ -201,10 +206,14 @@ public class ChangeScene : MonoBehaviour {
                             break;
                     }
                 }
-            instancia = Instantiate((GameObject)Resources.Load("prefabs/Player", typeof(GameObject)));
-            instancia.transform.parent = GameObject.Find("Canvas").transform;
+            instancia = Instantiate((GameObject)Resources.Load("prefabs/Character_1", typeof(GameObject)));
+            instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
             instancia.transform.position = playerPos;
             instancia.GetComponent<MoveObject>().enabled = false;
+            
         }
+
+        dataController.GetComponent<SaveGround>().ActualizarRuta(newPath);
+        Debug.Log("Fin");
     }
 }

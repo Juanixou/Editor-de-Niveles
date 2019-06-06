@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed = 2.5f;
-    bool grounded = false;
+    public bool grounded = false;
     bool walled = false;
     public Transform groundCheck;
     public Transform wallCheck;
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce=300f;
     public float jumpPushForce = 50f;
     public float jumpWallForce = 20f;
-    private bool doubleJump = false;
+    public bool doubleJump = false;
     private float moveHorizontal = 0.0f;
 
 
@@ -126,9 +126,18 @@ public class PlayerMovement : MonoBehaviour {
         //Parte utilizada para el salto
         if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Salto Vertical");
             anim.SetBool("Ground", false);
-            rb2d.AddForce(new Vector2(0, jumpForce));
+            if (grounded)
+            {
+                rb2d.AddForce(new Vector2(0, jumpForce));
+            }
+            else
+            {
+                //Controlamos la velocidad del segundo salto
+                rb2d.velocity = new Vector2(0,0);
+                rb2d.AddForce(new Vector2(0, jumpForce));
+            }
+
             if (!doubleJump && !grounded)
             {
                 doubleJump = true;
@@ -137,7 +146,6 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (walled && Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Salto Pared");
             WallJump();
         }
 

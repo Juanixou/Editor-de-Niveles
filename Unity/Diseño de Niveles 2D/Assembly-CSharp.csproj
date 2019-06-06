@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\MoveObject.cs" />
     <Compile Include="Assets\Scripts\MuerteCaida.cs" />
+    <Compile Include="Assets\Scripts\PlatformMovement.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\BoxPull.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\ChangeProperties.cs" />
@@ -103,12 +104,14 @@
     <Compile Include="Assets\Scripts\Save Files\DoorData.cs" />
     <Compile Include="Assets\Scripts\Save Files\GroundData.cs" />
     <Compile Include="Assets\Scripts\Save Files\JsonHelper.cs" />
+    <Compile Include="Assets\Scripts\Save Files\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Save Files\SaveGround.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
     <Compile Include="Assets\Scripts\States\SelectLevel.cs" />
     <Compile Include="Assets\Scripts\States\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Transformaciones Objetos\ComportamientoIman.cs" />
+    <Compile Include="Assets\Scripts\Trash.cs" />
     <Compile Include="Assets\Scripts\Weapon's Scripts\Melee\MeleeDamage.cs" />
     <None Include="Assets\Shaders\Sprites-Outline.shader" />
     <None Include="Assets\Shaders\Contorno.shader" />

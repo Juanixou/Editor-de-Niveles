@@ -82,6 +82,7 @@ public class InstanciarArrastrar : MonoBehaviour
                     iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
                 }
                 break;
+
             case "Espinas":
                 //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
@@ -89,6 +90,18 @@ public class InstanciarArrastrar : MonoBehaviour
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
                 break;
+
+            case "Enemy 1":
+            case "Enemy 2":
+            case "Enemy 3":
+            case "Enemy 4":
+                //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
+                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
+                instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                instancia.transform.position = this.transform.position;
+                saver.GetComponent<SaveGround>().InsertGround(instancia);
+                break;
+
             default:
                 break;
 

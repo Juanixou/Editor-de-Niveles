@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,7 +24,15 @@ public class MoveObject : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        selection = GameObject.Find("SelectionController").GetComponent<SelectionManager>().transformacion;
+        try
+        {
+            selection = GameObject.Find("SelectionController").GetComponent<SelectionManager>().transformacion;
+        }
+        catch(NullReferenceException e)
+        {
+            Debug.Log("No existe controlador");
+        }
+
         isMoving = false;
         listaColliders = new List<GameObject>();
         
@@ -127,6 +136,9 @@ public class MoveObject : MonoBehaviour {
                     Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
                     //Se calcula la diferencia entre la posicion anterior y nueva del ratón y se aplica un pequeño offset para poder ajustar bien el tamaño.
                     Vector3 curSize = (curScreenPoint2 - last_mouse_pos) * 0.01f + new Vector3(GetComponent<SpriteRenderer>().size.x, GetComponent<SpriteRenderer>().size.y, 0);
+                    Vector3 prevSize = GetComponent<SpriteRenderer>().size;
+
+                    transform.localScale = new Vector2(transform.localScale.x*(curSize.x/ prevSize.x),transform.localScale.y*(curSize.y/ prevSize.y));
                     GetComponent<SpriteRenderer>().size = curSize;
                     last_mouse_pos = curScreenPoint2;
                 }

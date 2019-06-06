@@ -7,8 +7,10 @@ using System;
 public class DoorData
 {
     public string doorName;
+    public string userDoorName;
     public int id;
     public int postId;
+    public string postDoorName;
     public string postScene;
     public Vector3 position;
     public Vector3 rotation;
@@ -23,6 +25,8 @@ public class DoorData
         this.id = id;
         this.postScene = "";
         this.postId = -1;
+        this.userDoorName = "";
+        this.postDoorName = "";
     }
 
     public string DoorName { get; set; }
