@@ -34,25 +34,40 @@ public class BasicEnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dcha)
+        EnemyMovement();
+    }
+
+    public void EnemyMovement()
+    {
+
+        switch (this.name)
         {
-            this.transform.position= new Vector2(this.transform.position.x + 0.01f, this.transform.position.y);
-            actualDistance+=0.1f;
-            if(actualDistance >= maxDistance)
-            {
-                personaje.transform.Rotate(new Vector2(0, 180));
-                dcha = false;
-            }
+            case "Enemy 1":
+                if (dcha)
+                {
+                    this.transform.position = new Vector2(this.transform.position.x + 0.01f, this.transform.position.y);
+                    actualDistance += 0.1f;
+                    if (actualDistance >= maxDistance)
+                    {
+                        personaje.transform.Rotate(new Vector2(0, 180));
+                        dcha = false;
+                    }
+                }
+                else
+                {
+                    this.transform.position = new Vector2(this.transform.position.x - 0.01f, this.transform.position.y);
+                    actualDistance -= 0.1f;
+                    if (actualDistance <= minDistance)
+                    {
+                        personaje.transform.Rotate(new Vector2(0, 180));
+                        dcha = true;
+                    }
+                }
+                break;
+            default:
+                break;
         }
-        else
-        {
-            this.transform.position = new Vector2(this.transform.position.x - 0.01f, this.transform.position.y);
-            actualDistance -= 0.1f ;
-            if (actualDistance <= minDistance)
-            {
-                personaje.transform.Rotate(new Vector2(0, 180));
-                dcha = true;
-            }
-        }
+
+        
     }
 }

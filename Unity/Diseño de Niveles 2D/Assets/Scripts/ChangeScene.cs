@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -16,9 +17,16 @@ public class ChangeScene : MonoBehaviour {
     public GameObject dataController;
     void Start () {
         escena = SceneManager.GetActiveScene();
-        if(this.gameObject.transform.GetChild(0).gameObject!=null)
-        tecla = this.gameObject.transform.GetChild(0).gameObject;
-        dataController = GameObject.Find("DataController");
+        try
+        {
+            tecla = this.gameObject.transform.GetChild(0).gameObject;
+            dataController = GameObject.Find("DataController");
+        }catch(Exception e)
+        {
+
+        }
+
+
 	}
 	
 	// Update is called once per frame
@@ -31,7 +39,7 @@ public class ChangeScene : MonoBehaviour {
         {
             tecla.SetActive(false);
         }
-	}
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -20,6 +20,8 @@ public class MoveObject : MonoBehaviour {
     private bool isMoving;
     private List<GameObject> listaColliders;
     private SpriteRenderer outln;
+    public Vector2 factor = new Vector2(1.0f,1.0f);
+    private Vector3 scaleOrig;
 
 
     // Use this for initialization
@@ -30,9 +32,8 @@ public class MoveObject : MonoBehaviour {
         }
         catch(NullReferenceException e)
         {
-            Debug.Log("No existe controlador");
-        }
 
+        }
         isMoving = false;
         listaColliders = new List<GameObject>();
         
@@ -91,7 +92,6 @@ public class MoveObject : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        Debug.Log(selection);
         if (!enabled)
         {
             return;
@@ -134,12 +134,13 @@ public class MoveObject : MonoBehaviour {
                     isMoving = false;
                     /*Código de Escalado*/
                     Vector3 curScreenPoint2 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-                    //Se calcula la diferencia entre la posicion anterior y nueva del ratón y se aplica un pequeño offset para poder ajustar bien el tamaño.
-                    Vector3 curSize = (curScreenPoint2 - last_mouse_pos) * 0.01f + new Vector3(GetComponent<SpriteRenderer>().size.x, GetComponent<SpriteRenderer>().size.y, 0);
-                    Vector3 prevSize = GetComponent<SpriteRenderer>().size;
 
-                    transform.localScale = new Vector2(transform.localScale.x*(curSize.x/ prevSize.x),transform.localScale.y*(curSize.y/ prevSize.y));
-                    GetComponent<SpriteRenderer>().size = curSize;
+                    /*Cambiar Imagen y luego ajustar colliders*/
+                    Vector3 newCurSize = (curScreenPoint2 - last_mouse_pos);
+                    scaleOrig += newCurSize*0.03f;
+                    Vector3 imgSize = GetComponent<SpriteRenderer>().size;
+                    GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size = imgSize + newCurSize*0.03f;
+
                     last_mouse_pos = curScreenPoint2;
                 }
                 break;
@@ -158,12 +159,28 @@ public class MoveObject : MonoBehaviour {
         {
             this.GetComponent<SpriteOutline>().enabled = false;
         }
+        else if(selection != "Move" && this.tag == "Ground")
+        {
+            GameObject imanDcho = transform.Find("ImanDcho").gameObject;
+            GameObject imanIzq = transform.Find("ImanIzqd").gameObject;
+
+            imanDcho.transform.position = new Vector3(imanDcho.transform.position.x + scaleOrig.x / 2, imanIzq.transform.position.y,0.0f);
+            imanIzq.transform.position = new Vector3(imanIzq.transform.position.x - scaleOrig.x / 2, imanIzq.transform.position.y, 0.0f);
+            imanDcho.GetComponent<BoxCollider2D>().size = new Vector2(imanDcho.GetComponent<BoxCollider2D>().size.x, imanDcho.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);
+            imanIzq.GetComponent<BoxCollider2D>().size = new Vector2(imanIzq.GetComponent<BoxCollider2D>().size.x, imanIzq.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);
+            scaleOrig = Vector3.zero;
+        }
         outln.enabled = false;
     }
 
     public void SelectTransform(string tipo)
     {
         selection = tipo;
+    }
+
+    public void SetTransform(Vector2 pos)
+    {
+        this.transform.localPosition = pos;
     }
 
     IEnumerator WaitToActive(GameObject iman)

@@ -110,7 +110,11 @@ TextureImporter:
       - {x: -32, y: -32}
       - {x: 32, y: -32}
       - {x: 32, y: 32}
-    physicsShape: []
+    physicsShape:
+    - - {x: -32, y: 32}
+      - {x: -32, y: -32}
+      - {x: 32, y: -32}
+      - {x: 32, y: 32}
     bones: []
     spriteID: 6211ed6384ee8d24f9040f56faaf43b1
     vertices: []

@@ -4191,6 +4191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotar: 0
   escalar: 1
+  factor: {x: 1, y: 1}
 --- !u!114 &1956685351393496955
 MonoBehaviour:
   m_ObjectHideFlags: 0

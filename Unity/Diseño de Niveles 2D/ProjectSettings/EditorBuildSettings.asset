@@ -21,9 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Wall Jump Trial.unity
     guid: c6affdd6c3c693d498bd199b470a554e
   - enabled: 1
-    path: Assets/Scenes/Editor.unity
-    guid: ecec14afcbc9f9e4daf3fa928b8d1800
-  - enabled: 1
     path: Assets/Scenes/Damage Trial.unity
     guid: ffe522b1b8fed1f49b58d851838272d8
   - enabled: 1
@@ -35,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Crear-Cargar.unity
     guid: 720b2bc962d846e4ba36a06aa36a943a
+  - enabled: 1
+    path: Assets/Scenes/Editor.unity
+    guid: ecec14afcbc9f9e4daf3fa928b8d1800
   m_configObjects: {}

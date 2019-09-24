@@ -4,6 +4,9 @@ using System.IO;
 using UnityEngine;
 using System;
 using UnityEditor;
+using SFB;
+using System.Windows.Forms;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class SaveGround : MonoBehaviour
@@ -30,7 +33,14 @@ public class SaveGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            bool resp = CheckSave();
+            if (resp)
+            {
+                SceneManager.LoadScene("Inicio", LoadSceneMode.Single);
+            }
+        }
     }
 
     public void InsertGround(GameObject suelo)
@@ -93,7 +103,7 @@ public class SaveGround : MonoBehaviour
         //Se comprueba si el nivel está guardado, y si no, se muestra un mesaje de advertencia.
         if (listaObjetos.Count != 0)
         {
-            continuar = EditorUtility.DisplayDialog("Cuidado!", "Si continua, se borrarán los datos. Desea continuar?", "Si", "No");
+            continuar = CheckSave();
         }
         else
         {
@@ -103,7 +113,9 @@ public class SaveGround : MonoBehaviour
         if (continuar)
         {
             //Mostramos una ventana para seleccionar la carpeta del nivel correspondiente a cargar
-            string path = EditorUtility.OpenFolderPanel("Select Level", Application.persistentDataPath, "");
+            string path = StandaloneFileBrowser.OpenFolderPanel("Select Folder", UnityEngine.Application.persistentDataPath, false)[0];
+            //string path = path2[0];
+            Debug.Log("Path: " + path);
             //Si la ruta no está vacía, se cargan los ficheros
             if (path != "")
             {
@@ -192,7 +204,7 @@ public class SaveGround : MonoBehaviour
             if (dataPath == "")
             {
                 //Se decide el nombre y se crea el directorio
-                dataPath = EditorUtility.SaveFilePanel("Select Level Name", Application.persistentDataPath, "", "");
+                dataPath = StandaloneFileBrowser.OpenFolderPanel("Select Level Name", UnityEngine.Application.persistentDataPath, false)[0];
                 //dataPath = Path.Combine(Application.persistentDataPath, "GroundData.txt");
                 Directory.CreateDirectory(dataPath);
 
@@ -222,6 +234,19 @@ public class SaveGround : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool CheckSave()
+    {
+
+        DialogResult result = MessageBox.Show("Si continua, se borrarán los datos. Desea continuar?", "Cuidado!",
+                             MessageBoxButtons.OKCancel,
+                             MessageBoxIcon.Exclamation);
+        if (result == DialogResult.OK)
+        {
+            return true;
+        }
+        return false;
     }
 
 }

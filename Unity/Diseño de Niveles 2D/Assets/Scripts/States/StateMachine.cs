@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
+using SFB;
 
 public class StateMachine : MonoBehaviour
 {
@@ -83,7 +84,9 @@ public class StateMachine : MonoBehaviour
 
         idPuertaActual = Int32.Parse(EventSystem.current.currentSelectedGameObject.name);
         nextDoor = EventSystem.current.currentSelectedGameObject.transform.Find("NextDoor_"+idPuertaActual).GetComponent<Text>();
-        nextScene = EditorUtility.OpenFolderPanel("Select Level", Application.persistentDataPath, "");
+
+        nextScene = StandaloneFileBrowser.OpenFolderPanel("Select Folder", UnityEngine.Application.persistentDataPath, false)[0];
+
         if (nextScene != "")
         {
             ventana.SetActive(false);
