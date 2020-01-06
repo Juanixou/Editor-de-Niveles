@@ -320,9 +320,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>D:/UnityProjects/Editor de Niveles/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
-    </Reference>
     <Reference Include="Ookii.Dialogs">
       <HintPath>D:/UnityProjects/Editor de Niveles/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>
     </Reference>
@@ -384,18 +381,6 @@
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
       <Project>{FE5128B7-D45B-6ECE-BA27-EF145CB8DA5E}</Project>
       <Name>Assembly-CSharp-Editor-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{3614E3A9-BCCB-70D2-DA41-3EF04B659AAD}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="PackageToolsEditor.csproj">
-      <Project>{B999AD09-EFF6-5346-A808-5F1CC0C5286B}</Project>
-      <Name>PackageToolsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
-      <Project>{72F199DB-93A8-9DB3-D2B1-FBB885944ABB}</Project>
-      <Name>AstarPathfindingProjectEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

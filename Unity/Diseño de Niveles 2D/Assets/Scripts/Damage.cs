@@ -46,7 +46,7 @@ public class Damage : MonoBehaviour
 
             case "Enemy":
                 Debug.Log("Enemigo Dañado!");
-                if (isAttacking)
+                if (isAttacking && this.tag != "EnemyMeleeWeapon")
                 {
                     other.GetComponent<EnemiesHealth>().Damage(damage);
                     isAttacking = false;

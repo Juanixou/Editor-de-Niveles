@@ -183,6 +183,11 @@ public class MoveObject : MonoBehaviour {
         this.transform.localPosition = pos;
     }
 
+    public void TrasladarIman()
+    {
+        //Mover imanes al centro y después de rotación trasladar a los extremos
+    }
+
     IEnumerator WaitToActive(GameObject iman)
     {
         yield return new WaitForSeconds(2);

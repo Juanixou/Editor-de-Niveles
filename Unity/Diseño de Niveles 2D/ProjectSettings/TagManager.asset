@@ -14,6 +14,8 @@ TagManager:
   - iman
   - Enemy
   - Objects
+  - MeleeWeapon
+  - EnemyMeleeWeapon
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - Ground
   - Wall
   - BackGroundLayer
-  - 
+  - Enemy
   - 
   - 
   - 

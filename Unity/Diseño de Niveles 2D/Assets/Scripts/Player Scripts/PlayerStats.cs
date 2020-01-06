@@ -15,7 +15,20 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthBar = GameObject.FindGameObjectWithTag("Health");
+
+        //TO-DO: Coger el Health Bar del hijo, no uno genérico
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+
+            //This condition look for de health bar
+            if (this.transform.GetChild(i).name == "HealthBar")
+            {
+                healthBar = this.transform.GetChild(i).gameObject;
+            }
+            
+
+        }
+
         currentHealth = maxHealth;
         escena = SceneManager.GetActiveScene();
     }
@@ -41,12 +54,17 @@ public class PlayerStats : MonoBehaviour
     public void Damage(float dmg)
     {
         currentHealth -= dmg;
-        if (currentHealth >= 0)
+        if (currentHealth >= 0 && healthBar != null)
         {
             healthBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
             
         }
 
+    }
+
+    public void RotateHealthBar(Quaternion rotationQuantity)
+    {
+        healthBar.transform.rotation = rotationQuantity;
     }
 
 }

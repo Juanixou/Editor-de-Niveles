@@ -16,11 +16,17 @@ public class EnemiesHealth : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            if (this.transform.GetChild(i).GetChild(0).tag == "Health")
+            //This condition avoid an out of bounds exception
+            if(this.transform.GetChild(i).childCount != 0)
             {
-                healthBar = this.transform.GetChild(i).GetChild(0).gameObject;
-                GetComponent<BasicEnemyMovement>().healthBar = this.transform.GetChild(i).gameObject;
+                //This condition look for de health bar
+                if (this.transform.GetChild(i).GetChild(0).tag == "Health")
+                {
+                    healthBar = this.transform.GetChild(i).GetChild(0).gameObject;
+                    GetComponent<BasicEnemyMovement>().healthBar = this.transform.GetChild(i).gameObject;
+                }
             }
+            
         }
         currentHealth = maxHealth;
     }
@@ -71,7 +77,25 @@ public class EnemiesHealth : MonoBehaviour
         //anim.SetBool("Muerte", true);
         anim.Play("Die");
         healthBar.transform.parent.transform.gameObject.SetActive(false);
-        this.GetComponent<Damage>().enabled = false;
+        
+        //Check if Damage Component Exist before get null point exception
+        try
+        {
+            this.GetComponent<Damage>().enabled = false;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("No existe componente de daño. Error: " + e.ToString());
+        }
+
+        //Check if AI Component Exist before get null point exception
+        try
+        {
+            this.GetComponent<MyRayCast>().enabled = false;
+        }catch(System.Exception e)
+        {
+            Debug.Log("No existe componente de IA. Error: " + e.ToString());
+        }
         yield return new WaitForSeconds(5);
         Death();
     }

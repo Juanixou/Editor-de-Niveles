@@ -26,12 +26,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator anim;
 
+    private PlayerStats plySts;
+
     // Use this for initialization
     void Start () {
         caminando = false;
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-	}
+        plySts = GetComponent<PlayerStats>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -67,6 +71,8 @@ public class PlayerMovement : MonoBehaviour {
             caminando = true;
             anim.SetBool("Caminar", true);
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            plySts.RotateHealthBar(Quaternion.Euler(0, 180, 0));
+            
         }
         else if (velocity == 0)
         {
@@ -78,6 +84,7 @@ public class PlayerMovement : MonoBehaviour {
             caminando = true;
             anim.SetBool("Caminar", true);
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            plySts.RotateHealthBar(Quaternion.Euler(0, 0, 0));
         }
         //Use the two store floats to create a new Vector2 variable movement.
         Vector2 movement = new Vector2(velocity*speed, rb2d.velocity.y);
@@ -118,8 +125,8 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (rb2d.velocity.y <= 15.0f || rb2d.velocity.y >= -12.0f)
         {
-            anim.SetFloat("vSpeed", rb2d.velocity.y);
-            anim.SetFloat("JumpSpeed", rb2d.velocity.y);
+            //anim.SetFloat("vSpeed", rb2d.velocity.y);
+            //anim.SetFloat("JumpSpeed", rb2d.velocity.y);
         }
 
 
