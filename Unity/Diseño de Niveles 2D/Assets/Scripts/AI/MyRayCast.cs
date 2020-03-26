@@ -16,6 +16,8 @@ public class MyRayCast : MonoBehaviour
     public Animator anim;
     Rigidbody2D rb2d;
 
+    private bool detected;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -25,6 +27,7 @@ public class MyRayCast : MonoBehaviour
         anim = animation.GetComponentInChildren<Animator>();
         //anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        detected = false;
     }
 
     void Update()
@@ -58,6 +61,7 @@ public class MyRayCast : MonoBehaviour
         }
         else
         {
+            detected = true;
             anim.SetBool("Atacar", false);
             //Nos movemos hacia el player
             //rb2d.MovePosition(new Vector2(transform.position.x + dir.x, transform.position.y + dir.y) * speed * Time.deltaTime);
@@ -76,9 +80,10 @@ public class MyRayCast : MonoBehaviour
             //TODO: Pasamo a idle
             anim.SetBool("Walking", false);
             anim.SetBool("Atacar", false);
+            detected = false;
         }
 
-        if (target.x < this.transform.position.x)
+        if (target.x < this.transform.position.x && detected)
         {
             animation.transform.rotation = Quaternion.Euler(0, 180, 0);
         }

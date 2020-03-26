@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D rb2d;
 
     private Animator anim;
+    private GameObject animation;
 
     private PlayerStats plySts;
 
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         plySts = GetComponent<PlayerStats>();
+        animation = gameObject.transform.GetChild(0).gameObject;
 
     }
 	
@@ -70,8 +72,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             caminando = true;
             anim.SetBool("Caminar", true);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            plySts.RotateHealthBar(Quaternion.Euler(0, 180, 0));
+            animation.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //plySts.RotateHealthBar(Quaternion.Euler(0, 0, 0));
             
         }
         else if (velocity == 0)
@@ -83,8 +85,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             caminando = true;
             anim.SetBool("Caminar", true);
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            plySts.RotateHealthBar(Quaternion.Euler(0, 0, 0));
+            animation.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //plySts.RotateHealthBar(Quaternion.Euler(0, 0, 0));
         }
         //Use the two store floats to create a new Vector2 variable movement.
         Vector2 movement = new Vector2(velocity*speed, rb2d.velocity.y);

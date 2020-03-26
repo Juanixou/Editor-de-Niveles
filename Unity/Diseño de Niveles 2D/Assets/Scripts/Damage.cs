@@ -40,6 +40,7 @@ public class Damage : MonoBehaviour
                     other.GetComponent<PlayerStats>().Damage(damage);
                     damaged = false;
                     StartCoroutine(WaitDamage());
+                    Debug.Log("ATAQUE A PLAYER"); 
                 }
 
                 break;

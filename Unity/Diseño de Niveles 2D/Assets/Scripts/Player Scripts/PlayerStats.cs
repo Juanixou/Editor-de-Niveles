@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     public float currentHealth;
     private Scene escena;
     public GameObject healthBar;
+    private GameObject greenBar;
     private Transform greenHealth;
 
 
@@ -24,6 +25,13 @@ public class PlayerStats : MonoBehaviour
             if (this.transform.GetChild(i).name == "HealthBar")
             {
                 healthBar = this.transform.GetChild(i).gameObject;
+                for(int j = 0; j < healthBar.transform.childCount; j++)
+                {
+                    if(healthBar.transform.GetChild(j).tag == "Health")
+                    {
+                        greenBar = healthBar.transform.GetChild(j).gameObject;
+                    }
+                }
             }
             
 
@@ -54,10 +62,11 @@ public class PlayerStats : MonoBehaviour
     public void Damage(float dmg)
     {
         currentHealth -= dmg;
-        if (currentHealth >= 0 && healthBar != null)
+        if (currentHealth >= 0 && greenBar != null)
         {
-            healthBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
             
+            greenBar.transform.localScale = new Vector2(currentHealth / maxHealth, greenBar.transform.localScale.y);
+            Debug.Log(currentHealth);
         }
 
     }
