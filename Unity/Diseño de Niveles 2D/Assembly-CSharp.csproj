@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Enemies Behaviour\BasicEnemyMovement.cs" />
     <Compile Include="Assets\Scripts\Enemies Behaviour\EnemiesHealth.cs" />
     <Compile Include="Assets\Scripts\Enemies Behaviour\EnemyDetection.cs" />
+    <Compile Include="Assets\Scripts\Enemies Behaviour\MyDistanceAttack.cs" />
     <Compile Include="Assets\Scripts\InstanciarArrastrar.cs" />
     <Compile Include="Assets\Scripts\InstantiateElements.cs" />
     <Compile Include="Assets\Scripts\Interaccion NPCs\Colision.cs" />

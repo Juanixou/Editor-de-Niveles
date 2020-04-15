@@ -23,16 +23,16 @@ public class MoveCamera : MonoBehaviour {
         if (Input.GetKey(KeyCode.RightArrow)&&transform.position.x<=50)
         {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-            MoveInstances("dch");
-            //instancias.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-            //transformaciones.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            //MoveInstances("dch");
+            instancias.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            transformaciones.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
         if (Input.GetKey(KeyCode.LeftArrow)&&transform.position.x>=0)
         {
             transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            MoveInstances("izq");
-            //instancias.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            //transformaciones.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+            //MoveInstances("izq");
+            instancias.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+            transformaciones.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
         }
         /************** CONTROL VERTICAL **************
         if (Input.GetKey(KeyCode.DownArrow))
@@ -57,14 +57,14 @@ public class MoveCamera : MonoBehaviour {
         {
             foreach(GameObject elem in elements)
             {
-                elem.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+                elem.transform.position = new Vector3(elem.transform.position.x + (-speed * Time.deltaTime), elem.transform.position.y, elem.transform.position.z);
             }
         }
         else
         {
             foreach (GameObject elem in elements)
             {
-                elem.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                elem.transform.position = new Vector3(elem.transform.position.x + (speed * Time.deltaTime), elem.transform.position.y, elem.transform.position.z);
             }
         }
     }

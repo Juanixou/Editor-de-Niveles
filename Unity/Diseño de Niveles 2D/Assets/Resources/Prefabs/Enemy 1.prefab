@@ -3644,6 +3644,7 @@ GameObject:
   - component: {fileID: 4346979174095881135}
   - component: {fileID: 8020812100473945335}
   - component: {fileID: 8998853484519012348}
+  - component: {fileID: 535777272066649191}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -3927,6 +3928,27 @@ MonoBehaviour:
   rotar: 0
   escalar: 0
   factor: {x: 1, y: 1}
+--- !u!50 &535777272066649191
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768184198583581}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1773241965499033
 GameObject:
   m_ObjectHideFlags: 0
@@ -5073,6 +5095,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4701541098381077}
     m_Modifications:
+    - target: {fileID: 2189311355432483022, guid: 1f01e490a70b70e41981f299bc3d7188,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
     - target: {fileID: 1481349199217629168, guid: 1f01e490a70b70e41981f299bc3d7188,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5137,11 +5164,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 17.015377
-      objectReference: {fileID: 0}
-    - target: {fileID: 2189311355432483022, guid: 1f01e490a70b70e41981f299bc3d7188,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f01e490a70b70e41981f299bc3d7188, type: 3}

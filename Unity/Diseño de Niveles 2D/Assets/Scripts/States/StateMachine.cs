@@ -18,6 +18,7 @@ public class StateMachine : MonoBehaviour
     public string nextScene;
     public List<string> listaOpciones;
     public GameObject controlador;
+    public GameObject doorNameGO;
     private string[] name;
     private DoorData[] puertas;
     private Text nextDoor;
@@ -136,6 +137,12 @@ public class StateMachine : MonoBehaviour
         name[Int32.Parse(aux)-1] = EventSystem.current.currentSelectedGameObject.transform.Find("Text").GetComponent<Text>().text;
         controlador.GetComponent<SaveGround>().ActualizarDatosPuerta(Int32.Parse(aux), -1, nextScene, name[Int32.Parse(aux)-1], "");
         Debug.Log(name[Int32.Parse(aux) - 1]);
+    }
+
+    public GameObject ShowDoorNameOption()
+    {
+        doorNameGO.SetActive(true);
+        return doorNameGO;
     }
 
 }

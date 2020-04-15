@@ -147,6 +147,12 @@ public class MoveObject : MonoBehaviour {
             default:
                 break;
         }
+
+        if (Input.GetKey(KeyCode.Delete))
+        {
+            Destroy(this.gameObject);
+            return;
+        }
     }
 
     public void OnMouseUp()
@@ -164,7 +170,7 @@ public class MoveObject : MonoBehaviour {
             GameObject imanDcho = transform.Find("ImanDcho").gameObject;
             GameObject imanIzq = transform.Find("ImanIzqd").gameObject;
 
-            imanDcho.transform.position = new Vector3(imanDcho.transform.position.x + scaleOrig.x / 2, imanIzq.transform.position.y,0.0f);
+            imanDcho.transform.position = new Vector3(imanDcho.transform.position.x + scaleOrig.x / 2, imanDcho.transform.position.y,0.0f);
             imanIzq.transform.position = new Vector3(imanIzq.transform.position.x - scaleOrig.x / 2, imanIzq.transform.position.y, 0.0f);
             imanDcho.GetComponent<BoxCollider2D>().size = new Vector2(imanDcho.GetComponent<BoxCollider2D>().size.x, imanDcho.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);
             imanIzq.GetComponent<BoxCollider2D>().size = new Vector2(imanIzq.GetComponent<BoxCollider2D>().size.x, imanIzq.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);

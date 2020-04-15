@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Pathfinding Trial.unity
+- path: Assets/Scenes/DistanceEnemyTrial.unity
   isLoaded: 1
   isActive: 1

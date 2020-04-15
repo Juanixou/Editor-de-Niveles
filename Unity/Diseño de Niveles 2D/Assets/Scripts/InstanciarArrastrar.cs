@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InstanciarArrastrar : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class InstanciarArrastrar : MonoBehaviour
 
     GameObject instancia;
     public GameObject ventanaEstados;
+    public GameObject doorName;
 
     private Vector3 offsetSize;
 
@@ -84,10 +86,14 @@ public class InstanciarArrastrar : MonoBehaviour
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
                 AddDescendantsWithTag(instancia.transform, "iman", listaColliders);
+                int count = 0;
                 foreach (GameObject iman in listaColliders)
                 {
+                    count++;
+                    iman.GetComponentInChildren<ComportamientoIman>().enabled = true;
                     iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
                 }
+                Debug.Log(count);
                 break;
 
             case "Espinas":
@@ -107,6 +113,8 @@ public class InstanciarArrastrar : MonoBehaviour
                 instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
+                if (instancia.GetComponent<BasicEnemyMovement>() != null) instancia.GetComponent<BasicEnemyMovement>().enabled = false;
+                if (instancia.GetComponent<MyRayCast>() != null) instancia.GetComponent<MyRayCast>().enabled = false;
                 //Desactivar Comportamiento
                 instancia.GetComponent<BasicEnemyMovement>().enabled = false;
                 break;
@@ -136,27 +144,72 @@ public class InstanciarArrastrar : MonoBehaviour
         if (instancia.name.Contains("Suelo"))
         {
             SpriteRenderer obj = instancia.transform.Find("Marco").GetComponent<SpriteRenderer>();
+            //GetComponent<MoveObject>().enabled = true;
 
             if (obj != null)
             {
                 obj.enabled = false;
             }
+        }else if (instancia.name.Contains("Puerta"))
+        {
+            ManageDoorName();
         }
 
         foreach (GameObject iman in listaColliders)
         {
+            iman.GetComponentInChildren<ComportamientoIman>().enabled = false;
             iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
         }
+        listaColliders.Clear();
     }
 
     private void AddDescendantsWithTag(Transform parent, string tag, List<GameObject> list)
     {
         foreach (Transform child in parent)
         {
+            
             if (child.gameObject.tag == tag)
             {
                 list.Add(child.gameObject);
             }
         }
     }
+
+    private void ManageDoorName()
+    {
+        doorName = GameObject.Find("StateController").GetComponent<StateMachine>().ShowDoorNameOption();
+
+        Transform doorNameText = null;
+        Transform doorNameBtn = null;
+
+        for(int i = 0; i < doorName.transform.childCount; ++i)
+        {
+            switch (doorName.transform.GetChild(i).name)
+            {
+                case "DoorInputField":
+                    doorNameText = doorName.transform.GetChild(i);
+                    break;
+                case "SaveDoorButton":
+                    doorNameBtn = doorName.transform.GetChild(i);
+                    break;
+            }
+        }
+        InputField input = doorNameText.GetComponent<InputField>();
+        input.onValueChanged.AddListener(delegate { ValueChange(doorNameBtn,input); });
+        input.Select();
+        input.ActivateInputField();
+    }
+
+    public void ValueChange(Transform doorBtn, InputField input)
+    {
+        if(input.text != "")
+        {
+            doorBtn.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            doorBtn.GetComponent<Button>().interactable = true;
+        }
+    }
+
 }

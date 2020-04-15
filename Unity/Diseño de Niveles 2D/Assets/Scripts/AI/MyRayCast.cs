@@ -18,6 +18,13 @@ public class MyRayCast : MonoBehaviour
 
     private bool detected;
 
+    //Ground check variables
+    public Transform groundCheck;
+    public bool grounded = false;
+    float groundRadius = 0.2f;
+    public LayerMask whatIsGround;
+
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -32,6 +39,32 @@ public class MyRayCast : MonoBehaviour
 
     void Update()
     {
+
+        CheckGround();
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, visionRadius);
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+    }
+
+    private void CheckGround()
+    {
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+
+
+        if (grounded)
+        {
+            this.GetComponent<Rigidbody2D>();
+            AIBehaviour();
+        }
+    }
+
+    private void AIBehaviour()
+    {
         Vector3 target = initialPosition;
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position,
@@ -41,19 +74,19 @@ public class MyRayCast : MonoBehaviour
         Vector3 forward = transform.TransformDirection(player.transform.position - transform.position);
         Debug.DrawRay(transform.position, forward, Color.red);
 
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
-            if(hit.collider.tag == "Player")
+            if (hit.collider.tag == "Player")
             {
                 target = player.transform.position;
-                
+
             }
         }
 
         float distance = Vector3.Distance(target, transform.position);
         Vector3 dir = (target - transform.position).normalized;
 
-        if(target != initialPosition && distance < attackRadius)
+        if (target != initialPosition && distance < attackRadius)
         {
             //TODO: Activamos las animaciones de ataque
             anim.SetBool("Walking", false);
@@ -74,7 +107,7 @@ public class MyRayCast : MonoBehaviour
         }
 
         //Evitamos bugs forzando la posicion inicial
-        if(target == initialPosition && distance < 0.02f)
+        if (target == initialPosition && distance < 0.02f)
         {
             transform.position = initialPosition;
             //TODO: Pasamo a idle
@@ -93,13 +126,6 @@ public class MyRayCast : MonoBehaviour
         }
 
         Debug.DrawLine(transform.position, target, Color.green);
-
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, visionRadius);
-        Gizmos.DrawWireSphere(transform.position, attackRadius);
-    }
 }

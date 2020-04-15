@@ -3710,6 +3710,7 @@ Transform:
   m_Children:
   - {fileID: 4611858194086833}
   - {fileID: 1118807653000976756}
+  - {fileID: 8461621082746261182}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4038,6 +4039,11 @@ MonoBehaviour:
   attackRadius: 3
   speed: 1.5
   anim: {fileID: 0}
+  groundCheck: {fileID: 0}
+  grounded: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1773241965499033
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,6 +5183,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1246050993050163030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8461621082746261182}
+  m_Layer: 13
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8461621082746261182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246050993050163030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4701541098381077}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1947809718591393412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5259,17 +5295,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 17.015379
       objectReference: {fileID: 0}
-    - target: {fileID: 1631922982293144860, guid: 1f01e490a70b70e41981f299bc3d7188,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 6511857775700022832, guid: 1f01e490a70b70e41981f299bc3d7188,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5265508210995287667, guid: 1f01e490a70b70e41981f299bc3d7188,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631922982293144860, guid: 1f01e490a70b70e41981f299bc3d7188,
         type: 3}
       propertyPath: m_Layer
       value: 13

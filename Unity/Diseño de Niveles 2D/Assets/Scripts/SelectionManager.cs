@@ -45,6 +45,13 @@ public class SelectionManager : MonoBehaviour {
             player.GetComponent<Rigidbody2D>().gravityScale = 3;
             player.GetComponent<MoveObject>().enabled = false;
         }
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<MoveObject>().enabled = false;
+            if (enemy.GetComponent<BasicEnemyMovement>() != null) enemy.GetComponent<BasicEnemyMovement>().enabled = true;
+            if (enemy.GetComponent<MyRayCast>() != null) enemy.GetComponent<MyRayCast>().enabled = true;
+        }
         play.SetActive(false);
         pause.SetActive(true);
     }
@@ -58,6 +65,15 @@ public class SelectionManager : MonoBehaviour {
             player.GetComponent<Rigidbody2D>().gravityScale = 0;
             player.GetComponent<MoveObject>().enabled = true;
         }
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<MoveObject>().enabled = true;
+            if (enemy.GetComponent<BasicEnemyMovement>() != null) enemy.GetComponent<BasicEnemyMovement>().enabled = false;
+            if (enemy.GetComponent<MyRayCast>() != null) enemy.GetComponent<MyRayCast>().enabled = false;
+        }
+
         play.SetActive(true);
         pause.SetActive(false);
     }
