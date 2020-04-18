@@ -3644,6 +3644,7 @@ GameObject:
   - component: {fileID: 8405783042428086503}
   - component: {fileID: 6097419907714215026}
   - component: {fileID: 5425685723844931098}
+  - component: {fileID: 1750180648}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Enemy
@@ -3658,7 +3659,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768184198583581}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
@@ -3904,7 +3905,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768184198583581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 006597c617110ec4dac0d071518126db, type: 3}
   m_Name: 
@@ -3919,7 +3920,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768184198583581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 746dd0b8381524447a5ac7fe06431b22, type: 3}
   m_Name: 
@@ -3927,6 +3928,21 @@ MonoBehaviour:
   minDistance: 50
   maxDistance: 500
   healthBar: {fileID: 0}
+--- !u!114 &1750180648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768184198583581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71854978b0e43f64a8bfa4f02f31b320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0
+  liftForce: 0
+  damping: 0
 --- !u!1 &1773241965499033
 GameObject:
   m_ObjectHideFlags: 0

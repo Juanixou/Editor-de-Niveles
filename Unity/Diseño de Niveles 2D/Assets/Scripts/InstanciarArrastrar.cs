@@ -50,7 +50,7 @@ public class InstanciarArrastrar : MonoBehaviour
                 {
                     //Instanciamos, hacemos hijo del canvas y actualizamos datos para no poder controlarlo por teclado.
                     instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                    instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                    instancia.transform.SetParent(GameObject.Find("Objects").transform, false);
                     instancia.transform.position = this.transform.position;
                     instancia.GetComponent<Rigidbody2D>().gravityScale = 0;
                     instancia.GetComponent<PlayerMovement>().enabled = false;
@@ -68,11 +68,10 @@ public class InstanciarArrastrar : MonoBehaviour
                     int id = ventanaEstados.GetComponent<StateMachine>().ActivarEstados();
                     //Instanciamos, hacemos hijo del canvas, creamos un id para el futuro y lo metemos en la lista de serialización.
                     instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                    instancia.transform.parent = GameObject.Find("Canvas").transform;
+                    instancia.transform.parent = GameObject.Find("Objects").transform;
                     instancia.transform.position = this.transform.position;
                     instancia.GetComponent<ChangeScene>().id = id;
                     saver.GetComponent<SaveGround>().InsertGround(instancia);
-                    saver.GetComponent<SaveGround>().InsertDoor(instancia);
                 }
                 break;
 
@@ -82,7 +81,7 @@ public class InstanciarArrastrar : MonoBehaviour
             case "Suelo_3":
                 //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                instancia.transform.parent = GameObject.Find("Canvas").transform;
+                instancia.transform.parent = GameObject.Find("Objects").transform;
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
                 AddDescendantsWithTag(instancia.transform, "iman", listaColliders);
@@ -99,7 +98,7 @@ public class InstanciarArrastrar : MonoBehaviour
             case "Espinas":
                 //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                instancia.transform.SetParent(GameObject.Find("Objects").transform, false);
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
                 break;
@@ -110,11 +109,12 @@ public class InstanciarArrastrar : MonoBehaviour
             case "Enemy 4":
                 //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                instancia.transform.SetParent(GameObject.Find("Objects").transform, false);
                 instancia.transform.position = this.transform.position;
                 saver.GetComponent<SaveGround>().InsertGround(instancia);
                 if (instancia.GetComponent<BasicEnemyMovement>() != null) instancia.GetComponent<BasicEnemyMovement>().enabled = false;
                 if (instancia.GetComponent<MyRayCast>() != null) instancia.GetComponent<MyRayCast>().enabled = false;
+                if (instancia.GetComponent<MyDistanceAttack>() != null) instancia.GetComponent<MyDistanceAttack>().enabled = false;
                 //Desactivar Comportamiento
                 instancia.GetComponent<BasicEnemyMovement>().enabled = false;
                 break;
@@ -196,6 +196,7 @@ public class InstanciarArrastrar : MonoBehaviour
         }
         InputField input = doorNameText.GetComponent<InputField>();
         input.onValueChanged.AddListener(delegate { ValueChange(doorNameBtn,input); });
+        doorNameBtn.GetComponent<Button>().onClick.AddListener(delegate { SaveDoorName(input.text); });
         input.Select();
         input.ActivateInputField();
     }
@@ -210,6 +211,11 @@ public class InstanciarArrastrar : MonoBehaviour
         {
             doorBtn.GetComponent<Button>().interactable = true;
         }
+    }
+
+    public void SaveDoorName(string name)
+    {
+        saver.GetComponent<SaveGround>().InsertDoor(instancia,name);
     }
 
 }

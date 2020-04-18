@@ -12,6 +12,9 @@ public class SelectionManager : MonoBehaviour {
     public GameObject pause;
     Transform canvas;
 
+    private Vector3 playerPosition;
+    private Vector3 cameraPosition;
+
     // Use this for initialization
     void Start () {
         transformacion = "Move";
@@ -39,6 +42,8 @@ public class SelectionManager : MonoBehaviour {
     public void Comenzar()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerPosition = player.transform.position;
+        cameraPosition = Camera.main.transform.position;
         if (player != null)
         {
             player.GetComponent<PlayerMovement>().enabled = true;
@@ -51,7 +56,9 @@ public class SelectionManager : MonoBehaviour {
             enemy.GetComponent<MoveObject>().enabled = false;
             if (enemy.GetComponent<BasicEnemyMovement>() != null) enemy.GetComponent<BasicEnemyMovement>().enabled = true;
             if (enemy.GetComponent<MyRayCast>() != null) enemy.GetComponent<MyRayCast>().enabled = true;
+            if (enemy.GetComponent<MyDistanceAttack>() != null) enemy.GetComponent<MyDistanceAttack>().enabled = true;
         }
+        Camera.main.GetComponent<UnityStandardAssets._2D.Camera2DFollow>().enabled = true;
         play.SetActive(false);
         pause.SetActive(true);
     }
@@ -59,6 +66,8 @@ public class SelectionManager : MonoBehaviour {
     public void Editar()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = playerPosition;
+        Camera.main.transform.position = cameraPosition;
         if (player != null)
         {
             player.GetComponent<PlayerMovement>().enabled = false;
@@ -72,8 +81,9 @@ public class SelectionManager : MonoBehaviour {
             enemy.GetComponent<MoveObject>().enabled = true;
             if (enemy.GetComponent<BasicEnemyMovement>() != null) enemy.GetComponent<BasicEnemyMovement>().enabled = false;
             if (enemy.GetComponent<MyRayCast>() != null) enemy.GetComponent<MyRayCast>().enabled = false;
+            if (enemy.GetComponent<MyDistanceAttack>() != null) enemy.GetComponent<MyDistanceAttack>().enabled = false;
         }
-
+        Camera.main.GetComponent<UnityStandardAssets._2D.Camera2DFollow>().enabled = false;
         play.SetActive(true);
         pause.SetActive(false);
     }

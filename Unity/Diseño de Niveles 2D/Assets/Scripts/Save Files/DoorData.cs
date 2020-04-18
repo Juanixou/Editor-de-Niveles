@@ -16,7 +16,7 @@ public class DoorData
     public Vector3 rotation;
     public Vector3 scale;
 
-    public DoorData(string doorName, Transform transformComponent, int id)
+    public DoorData(string doorName, Transform transformComponent, int id, string userDoorName)
     {
         this.doorName = doorName.Replace("(Clone)", "");
         this.position = transformComponent.position;
@@ -25,7 +25,7 @@ public class DoorData
         this.id = id;
         this.postScene = "";
         this.postId = -1;
-        this.userDoorName = "";
+        this.userDoorName = userDoorName;
         this.postDoorName = "";
     }
 

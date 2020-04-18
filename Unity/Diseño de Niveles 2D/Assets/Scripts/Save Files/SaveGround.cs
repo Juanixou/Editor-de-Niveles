@@ -35,8 +35,7 @@ public class SaveGround : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            bool resp = CheckSave();
-            if (resp)
+            if (CheckExit())
             {
                 SceneManager.LoadScene("Inicio", LoadSceneMode.Single);
             }
@@ -49,9 +48,9 @@ public class SaveGround : MonoBehaviour
         listaObjetos.Add(suelo);
     }
 
-    public void InsertDoor(GameObject puerta)
+    public void InsertDoor(GameObject puerta, string name)
     {
-        listaPuertas.Add(new DoorData(puerta.name, puerta.transform, puerta.GetComponent<ChangeScene>().id));
+        listaPuertas.Add(new DoorData(puerta.name, puerta.transform, puerta.GetComponent<ChangeScene>().id,name));
     }
 
     public void SaveData()
@@ -63,6 +62,7 @@ public class SaveGround : MonoBehaviour
         //Recorremos la lista de instancias y las almacenamos en su lista correspondiente
         foreach (GameObject item in listaObjetos)
         {
+            if (item == null) continue;
             //Si es un suelo...
             if (item.tag == "Ground")
             {
@@ -78,7 +78,7 @@ public class SaveGround : MonoBehaviour
         }
         //Creamos el StreamWriter para escribir en ficheros y limpiamos la lista
         StreamWriter streamWriter;
-        listaObjetos.Clear();
+        //listaObjetos.Clear();
         //Guardamos datos de los suelos
         using (streamWriter = File.CreateText(dataPath+"\\Grounds.txt"))
         {
@@ -91,7 +91,8 @@ public class SaveGround : MonoBehaviour
             string jsonString = JsonHelper.ToJson(listaPuertas.ToArray(), true);
             streamWriter.Write(jsonString);
         }
-
+        listaSuelos.Clear();
+        listaPuertas.Clear();
     }
 
     public void LoadData()
@@ -101,7 +102,8 @@ public class SaveGround : MonoBehaviour
         //Booleano para mostrar o no el mensaje de advertencia
         bool continuar=false;
         //Se comprueba si el nivel está guardado, y si no, se muestra un mesaje de advertencia.
-        if (listaObjetos.Count != 0)
+        //TODO: COMPROBAR CORRECTAMENTE LOS CAMBIOS EN EL NIVEL
+        if (listaSuelos.Count != 0)
         {
             continuar = CheckSave();
         }
@@ -115,13 +117,12 @@ public class SaveGround : MonoBehaviour
             //Mostramos una ventana para seleccionar la carpeta del nivel correspondiente a cargar
             string path = StandaloneFileBrowser.OpenFolderPanel("Select Folder", UnityEngine.Application.persistentDataPath, false)[0];
             //string path = path2[0];
-            Debug.Log("Path: " + path);
             //Si la ruta no está vacía, se cargan los ficheros
             if (path != "")
             {
                 //Eliminamos todos los objetos creados en la escena para cargar un nuevo nivel
                 dataPath = path;
-                foreach (Transform child in GameObject.Find("Canvas").transform)
+                foreach (Transform child in GameObject.Find("Objects").transform)
                 {
                     if (child.name.Contains("(Clone)"))
                     {
@@ -132,6 +133,9 @@ public class SaveGround : MonoBehaviour
                 DirectoryInfo dir = new DirectoryInfo(dataPath);
                 FileInfo[] info = dir.GetFiles("*.*");
 
+                //Limpiamos la lista de gameobjects
+                listaObjetos.Clear();
+                Camera.main.transform.position = Vector3.zero;
                 //Uno por uno, cargamos e instanciamos los objetos correspondientes
                 foreach(FileInfo file in info)
                 {
@@ -153,9 +157,10 @@ public class SaveGround : MonoBehaviour
                             for (int i = 0; i < suelos.Length; i++)
                             {
                                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + suelos[i].groundName, typeof(GameObject)));
-                                instancia.transform.parent = GameObject.Find("Canvas").transform;
+                                instancia.transform.parent = GameObject.Find("Objects").transform;
                                 instancia.transform.position = suelos[i].position;
-                                listaSuelos.Add(suelos[i]);
+                                //listaSuelos.Add(suelos[i]);
+                                listaObjetos.Add(instancia);
                             }
                             break;
                         //Para las puertas
@@ -175,10 +180,11 @@ public class SaveGround : MonoBehaviour
                             for (int i = 0; i < puertas.Length; i++)
                             {
                                 instancia = Instantiate((GameObject)Resources.Load("prefabs/" + puertas[i].doorName, typeof(GameObject)));
-                                instancia.transform.parent = GameObject.Find("Canvas").transform;
+                                instancia.transform.parent = GameObject.Find("Objects").transform;
                                 instancia.transform.position = puertas[i].position;
                                 instancia.GetComponent<ChangeScene>().id = puertas[i].id;
-                                listaPuertas.Add(puertas[i]);
+                                //listaPuertas.Add(puertas[i]);
+                                listaObjetos.Add(instancia);
 
                                 stateMachine.GetComponent<StateMachine>().ActivarEstadosCarga(puertas[i].userDoorName, puertas[i].postDoorName);
                             }
@@ -224,7 +230,6 @@ public class SaveGround : MonoBehaviour
         {
             if (door.id == idPuertaActual)
             {
-                Debug.Log("Actualizando datos puerta");
                 door.postId=idPuertaNueva;
                 door.postScene = rutaNivel;
                 door.userDoorName = name;
@@ -240,6 +245,19 @@ public class SaveGround : MonoBehaviour
     {
 
         DialogResult result = MessageBox.Show("Si continua, se borrarán los datos. Desea continuar?", "Cuidado!",
+                             MessageBoxButtons.OKCancel,
+                             MessageBoxIcon.Exclamation);
+        if (result == DialogResult.OK)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CheckExit()
+    {
+
+        DialogResult result = MessageBox.Show("Está seguro de que desea salir?", "Cuidado!",
                              MessageBoxButtons.OKCancel,
                              MessageBoxIcon.Exclamation);
         if (result == DialogResult.OK)

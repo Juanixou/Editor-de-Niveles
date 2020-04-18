@@ -4014,15 +4014,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 50
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!114 &1673438753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4037,13 +4037,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRadius: 8
   attackRadius: 3
-  speed: 1.5
+  speed: 5
   anim: {fileID: 0}
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 8461621082746261182}
   grounded: 0
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!1 &1773241965499033
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,6 @@ public class StateMachine : MonoBehaviour
     public List<string> listaOpciones;
     public GameObject controlador;
     public GameObject doorNameGO;
-    private string[] name;
     private DoorData[] puertas;
     private Text nextDoor;
 
@@ -30,7 +29,6 @@ public class StateMachine : MonoBehaviour
         controlador = GameObject.Find("DataController");
         listaOpciones = new List<string>();
         puertas = new DoorData[10];
-        name = new string[3];
         count = 0;
         opciones.onValueChanged.AddListener(delegate {DropdownValueChanged(opciones);});
     }
@@ -125,18 +123,6 @@ public class StateMachine : MonoBehaviour
                 nextDoor.text = puertas[i].userDoorName;
                 }   
             }
-        if (name[idPuertaActual-1] == null)
-            name[idPuertaActual-1] = idPuertaActual.ToString();
-        controlador.GetComponent<SaveGround>().ActualizarDatosPuerta(idPuertaActual, id , nextScene, name[idPuertaActual-1], drop.options[drop.value].text);
-    }
-
-    public void ChangeDoorName()
-    {
-        string aux = EventSystem.current.currentSelectedGameObject.name.Substring(EventSystem.current.currentSelectedGameObject.name.Length-1,1);
-        Debug.Log(aux);
-        name[Int32.Parse(aux)-1] = EventSystem.current.currentSelectedGameObject.transform.Find("Text").GetComponent<Text>().text;
-        controlador.GetComponent<SaveGround>().ActualizarDatosPuerta(Int32.Parse(aux), -1, nextScene, name[Int32.Parse(aux)-1], "");
-        Debug.Log(name[Int32.Parse(aux) - 1]);
     }
 
     public GameObject ShowDoorNameOption()

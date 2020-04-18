@@ -13,6 +13,9 @@ public class MyDistanceAttack : MonoBehaviour
     private Animator anim;
     //Rigidbody2D rb2D;
     GameObject player;
+    GameObject arrow;
+
+    private bool shoot = true;
 
 
     void Start()
@@ -24,26 +27,39 @@ public class MyDistanceAttack : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Cast a ray straight down.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position);
 
         float playerDistance = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.y - transform.position.y, 2)));
-        Debug.Log("Code Distance = " + playerDistance);
 
-        if(playerDistance<= 6.0)
+        if(playerDistance<= 6.0 && shoot)
         {
+            Debug.Log("Entramos en if");
+            shoot = false;
             Shoot();
-            anim.SetBool("Shoot", true);
+            
         }
 
     }
 
     void Shoot()
     {
-        GameObject instancia = Instantiate((GameObject)Resources.Load("prefabs/Espinas", typeof(GameObject)));
-        instancia.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        instancia.transform.LookAt(player.transform);
-        instancia.transform.Translate(player.transform.position);
+        anim.SetBool("Shoot", true);
+        arrow = Instantiate((GameObject)Resources.Load("prefabs/Arrow", typeof(GameObject)));
+        arrow.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        arrow.transform.position = this.transform.position;
+        Vector3 dir = player.transform.position - arrow.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        arrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        arrow.GetComponent<ProjectileBehaviour>().enabled = true;
+        anim.SetBool("Shoot", false);
+        StartCoroutine(WaitShoot());
+    }
+
+    IEnumerator WaitShoot()
+    {
+        Debug.Log("Esperando");
+        yield return new WaitForSeconds(2);
+        Debug.Log("Esperado suficiente");
+        shoot = true;
     }
 
 }

@@ -1,20 +1,14 @@
 Win64
 PlayerPath?
-D:/UnityProjects/Editor de Niveles/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/02-09-2019/Editor2D.exe
+D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/18-04-2020/Editor2D.exe
 SceneListBegin?
 Assets/Scenes/Inicio.unity
-Assets/Scenes/City.unity
-Assets/Scenes/Jump Trial.unity
-Assets/Scenes/Push Objects.unity
-Assets/Scenes/Wall Jump Trial.unity
-Assets/Scenes/Damage Trial.unity
 Assets/Scenes/Game Over.unity
-Assets/Scenes/Basic Enemy Trial.unity
 Assets/Scenes/Crear-Cargar.unity
 Assets/Scenes/Editor.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
-83e769eee07fc231384c812eedbb8224 Assembly-CSharp.dll:.CameraFollowPlayer
+29be3573673419e1658051315f2d7c9b Assembly-CSharp.dll:.CameraFollowPlayer
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 ccd6cc47c245224062d22efcb9b78aec Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.Character
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -175,9 +169,11 @@ e686f3c1011429b41e0a20f13c16d626 Assembly-CSharp.dll:.CanvasSampleOpenFileImage
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleSaveFileImage
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.ObjectResetter
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MuerteCaida
+15df0af29c1ad4caecd7367eecc7a08a Assembly-CSharp.dll:.MyRayCast
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameMenu
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.DesactivarVentana
 8dc81ddb0b7b69d062a5156ba52c20b9 Assembly-CSharp.dll:.Dialogos
+cd092ba60725d2d7d167abf4d85c0dba Assembly-CSharp.dll:.MyDistanceAttack
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 91b22bbf6308492319ca858ae7c891ec Assembly-CSharp.dll:.ChangeScene
 03ce04382016b280291ed2a362f5b96c Assembly-CSharp.dll:.BasicEnemyMovement
@@ -226,6 +222,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 c933b2cffdb9d1429a103e9d63c523ef Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.DynamicShadowSettings
+c16d1471299f5924f0bf5f9565af4b74 Assembly-CSharp.dll:.ProjectileBehaviour
 03b9ef2ed536e8d6280069f2195174da Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.SimpleActivatorMenu
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.AnimationEvents
@@ -238,13 +235,13 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 a8cd58c1680eb5251e5604e560cf89e9 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.TimedObjectDestructor
 21c1560c6f1582ce6f25a26af6e3a416 Assembly-CSharp.dll:.PlatformMovement
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
-5ae6e69538958ee2f2c5ace779bcf414 Assembly-CSharp.dll:.InstanciarArrastrar
+75a593bff0e0c6c3219a504f55b38e86 Assembly-CSharp.dll:.InstanciarArrastrar
 e71b983343281027af6d46282f67f8c3 Assembly-CSharp.dll:.Colision
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.FPSCounter
 af6247286e9ebb931308e55dd6150e6a Assembly-CSharp.dll:.ChangeProperties
-c57404e0ffddf48fb8de2dfc9a1415f5 Assembly-CSharp.dll:.StateMachine
+dff08496014365f91e48a69faee10819 Assembly-CSharp.dll:.StateMachine
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleSaveFileText
 672557fbe7a6c427c9be272c7062c402 Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.ScreenshotTransparent

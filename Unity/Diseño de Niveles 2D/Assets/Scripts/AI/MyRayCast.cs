@@ -41,7 +41,7 @@ public class MyRayCast : MonoBehaviour
     {
 
         CheckGround();
-
+        AIBehaviour();
     }
 
     private void OnDrawGizmosSelected()
@@ -58,8 +58,8 @@ public class MyRayCast : MonoBehaviour
 
         if (grounded)
         {
-            this.GetComponent<Rigidbody2D>();
-            AIBehaviour();
+            this.GetComponent<Rigidbody2D>().gravityScale=10;
+            //AIBehaviour();
         }
     }
 
