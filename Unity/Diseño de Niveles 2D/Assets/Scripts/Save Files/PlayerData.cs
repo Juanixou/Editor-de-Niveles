@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class PlayerData
 {
     public string name;
@@ -14,7 +16,7 @@ public class PlayerData
 
     public PlayerData(string name, Transform transf, float speed, float jump, float jumpPush, float jumpWall, float health) 
     {
-        this.name = name;
+        this.name = name.Replace("(Clone)", ""); ;
         this.position = transf.position;
         this.speed = speed;
         this.jumpForce = jump;

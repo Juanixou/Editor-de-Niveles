@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3177653132395015722}
   m_Layer: 0
   m_Name: Puerta
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotar: 0
   escalar: 1
+  factor: {x: 1, y: 1}
 --- !u!1001 &6089039082624071067
 PrefabInstance:
   m_ObjectHideFlags: 0

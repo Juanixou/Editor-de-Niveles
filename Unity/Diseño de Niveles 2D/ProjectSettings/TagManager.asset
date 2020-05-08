@@ -16,6 +16,7 @@ TagManager:
   - Objects
   - MeleeWeapon
   - EnemyMeleeWeapon
+  - Door
   layers:
   - Default
   - TransparentFX

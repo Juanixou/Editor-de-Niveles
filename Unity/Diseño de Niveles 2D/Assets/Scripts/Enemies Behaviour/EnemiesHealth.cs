@@ -41,7 +41,10 @@ public class EnemiesHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             this.GetComponent<BasicEnemyMovement>().enabled = false;
-            
+            Destroy(this.GetComponent<Rigidbody2D>());
+            if (this.GetComponent<BasicEnemyMovement>() != null) Destroy(this.GetComponent<BasicEnemyMovement>());
+            if (this.GetComponent<MyDistanceAttack>() != null) Destroy(this.GetComponent<MyDistanceAttack>());
+            if (this.GetComponent<MyRayCast>() != null) Destroy(this.GetComponent<MyRayCast>());
             StartCoroutine(Muerte());
             /*
             if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))

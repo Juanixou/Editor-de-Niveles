@@ -131,4 +131,9 @@ public class StateMachine : MonoBehaviour
         return doorNameGO;
     }
 
+    public void HideNameOption()
+    {
+        doorNameGO.SetActive(false);
+    }
+
 }

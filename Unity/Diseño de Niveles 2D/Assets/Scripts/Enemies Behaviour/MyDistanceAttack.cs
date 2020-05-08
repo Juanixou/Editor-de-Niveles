@@ -44,7 +44,7 @@ public class MyDistanceAttack : MonoBehaviour
     {
         anim.SetBool("Shoot", true);
         arrow = Instantiate((GameObject)Resources.Load("prefabs/Arrow", typeof(GameObject)));
-        arrow.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        arrow.transform.SetParent(GameObject.Find("Objects").transform, false);
         arrow.transform.position = this.transform.position;
         Vector3 dir = player.transform.position - arrow.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

@@ -14,6 +14,14 @@ public class BasicEnemyMovement : MonoBehaviour
 
     private Animator anim;
 
+    //Ground check variables
+    public Transform groundCheck;
+    public bool grounded = false;
+    //Defect value for Enemy 1
+    public float groundRadius = 0.074f;
+    public LayerMask whatIsGround;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +35,9 @@ public class BasicEnemyMovement : MonoBehaviour
             {
 
                 personaje = this.transform.GetChild(i).gameObject;
+            }else if (this.transform.GetChild(i).name == "Feet")
+            {
+                groundCheck = this.transform.GetChild(i).transform;
             }
         }
     }
@@ -35,19 +46,22 @@ public class BasicEnemyMovement : MonoBehaviour
     void Update()
     {
         EnemyMovement();
+        CheckGround();
+
     }
 
     public void EnemyMovement()
     {
-
-        switch (this.name)
+        string name = this.name.Replace("(Clone)", "");
+        switch (name)
         {
             case "Enemy 1":
                 if (dcha)
                 {
+                    Debug.Log("Pa la dcha");
                     this.transform.position = new Vector2(this.transform.position.x + 0.01f, this.transform.position.y);
                     actualDistance += 0.1f;
-                    if (actualDistance >= maxDistance)
+                    if (maxDistance != 0 && actualDistance >= maxDistance)
                     {
                         personaje.transform.Rotate(new Vector2(0, 180));
                         dcha = false;
@@ -55,9 +69,10 @@ public class BasicEnemyMovement : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Pa la izq");
                     this.transform.position = new Vector2(this.transform.position.x - 0.01f, this.transform.position.y);
                     actualDistance -= 0.1f;
-                    if (actualDistance <= minDistance)
+                    if (minDistance != 0 && actualDistance <= minDistance)
                     {
                         personaje.transform.Rotate(new Vector2(0, 180));
                         dcha = true;
@@ -70,4 +85,27 @@ public class BasicEnemyMovement : MonoBehaviour
 
         
     }
+
+    private void CheckGround()
+    {
+        if (groundCheck == null) return;
+        Debug.Log("Checkeandooo");
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+
+
+        if (!grounded)
+        {
+            Debug.Log("Cambio de lado");
+            dcha = !dcha;
+            personaje.transform.Rotate(new Vector2(0, 180));
+            StartCoroutine(WaitForChecking());
+        }
+    }
+
+    IEnumerator WaitForChecking()
+    {
+        yield return new WaitForSeconds(2);
+
+    }
+
 }

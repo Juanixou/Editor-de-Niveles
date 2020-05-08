@@ -42,6 +42,7 @@ public class SelectionManager : MonoBehaviour {
     public void Comenzar()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
         playerPosition = player.transform.position;
         cameraPosition = Camera.main.transform.position;
         if (player != null)

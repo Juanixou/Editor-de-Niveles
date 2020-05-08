@@ -56,7 +56,7 @@ public class MyRayCast : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
 
-        if (grounded)
+        if (!grounded)
         {
             this.GetComponent<Rigidbody2D>().gravityScale=10;
             //AIBehaviour();
@@ -98,7 +98,8 @@ public class MyRayCast : MonoBehaviour
             anim.SetBool("Atacar", false);
             //Nos movemos hacia el player
             //rb2d.MovePosition(new Vector2(transform.position.x + dir.x, transform.position.y + dir.y) * speed * Time.deltaTime);
-            rb2d.MovePosition(transform.position + dir * speed * Time.deltaTime);
+            Vector2 positionMoved = new Vector2(transform.position.x + dir.x * speed * Time.deltaTime, transform.position.y);
+            rb2d.MovePosition(positionMoved);
             anim.speed = 1;
 
 

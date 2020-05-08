@@ -125,7 +125,6 @@ public class ChangeScene : MonoBehaviour {
 
     public void LoadScene()
     {
-        Debug.Log("Cargando Escena");
         string newPath = "";
         int nextId = -1;
         Vector3 playerPos = new Vector3(0,0,0);
@@ -224,4 +223,10 @@ public class ChangeScene : MonoBehaviour {
         dataController.GetComponent<SaveGround>().ActualizarRuta(newPath);
         Debug.Log("Fin");
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
 }

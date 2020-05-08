@@ -3645,6 +3645,7 @@ GameObject:
   - component: {fileID: 6097419907714215026}
   - component: {fileID: 5425685723844931098}
   - component: {fileID: 1750180648}
+  - component: {fileID: 1216435896802740870}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Enemy
@@ -3661,7 +3662,7 @@ Transform:
   m_GameObject: {fileID: 1768184198583581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 1}
   m_Children:
   - {fileID: 4611858194086833}
   - {fileID: 1939606667493692247}
@@ -3905,7 +3906,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768184198583581}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 006597c617110ec4dac0d071518126db, type: 3}
   m_Name: 
@@ -3928,6 +3929,12 @@ MonoBehaviour:
   minDistance: 50
   maxDistance: 500
   healthBar: {fileID: 0}
+  groundCheck: {fileID: 0}
+  grounded: 0
+  groundRadius: 0.074
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1750180648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3943,6 +3950,27 @@ MonoBehaviour:
   floatHeight: 0
   liftForce: 0
   damping: 0
+--- !u!50 &1216435896802740870
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768184198583581}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1773241965499033
 GameObject:
   m_ObjectHideFlags: 0

@@ -1131,6 +1131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotar: 0
   escalar: 0
+  factor: {x: 1, y: 1}
 --- !u!1 &3296931634828950468
 GameObject:
   m_ObjectHideFlags: 0

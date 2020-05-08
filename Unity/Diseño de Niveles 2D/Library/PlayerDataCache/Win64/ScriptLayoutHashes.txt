@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/18-04-2020/Editor2D.exe
+D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/20-04-2020/Editor2D.exe
 SceneListBegin?
 Assets/Scenes/Inicio.unity
 Assets/Scenes/Game Over.unity
@@ -176,7 +176,7 @@ e686f3c1011429b41e0a20f13c16d626 Assembly-CSharp.dll:.CanvasSampleOpenFileImage
 cd092ba60725d2d7d167abf4d85c0dba Assembly-CSharp.dll:.MyDistanceAttack
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 91b22bbf6308492319ca858ae7c891ec Assembly-CSharp.dll:.ChangeScene
-03ce04382016b280291ed2a362f5b96c Assembly-CSharp.dll:.BasicEnemyMovement
+16089e76710009d8de51c35f51ad81a4 Assembly-CSharp.dll:.BasicEnemyMovement
 f0a951a38be927372a72708c6c053f18 Assembly-CSharp.dll:.ActivarVentanas
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleOpenFileTextMultiple
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.Palette

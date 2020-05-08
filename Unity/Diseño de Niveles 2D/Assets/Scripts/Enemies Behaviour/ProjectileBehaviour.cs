@@ -48,15 +48,23 @@ public class ProjectileBehaviour : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag.Equals("Enemy")) return;
+        if (other.tag.Equals("MeleeWeapon")) return;
         move = false;
         Debug.Log("Flecha impacta");
-        if (other.tag == "Player")
+        switch (other.tag)
         {
-            Debug.Log("Colision Player");
-            Destroy(this.gameObject);
-        }else{
-            Debug.Log("Colision Otro");
-            StartCoroutine(WaitForDisapear());
+            case "Player":
+                Debug.Log("Colision Player");
+                Destroy(this.gameObject);
+                break;
+            case "Ground":
+                Debug.Log("Colision Otro");
+                StartCoroutine(WaitForDisapear());
+                break;
+            default:
+                Debug.Log("Colision Otro");
+                StartCoroutine(WaitForDisapear());
+                break;
         }
 
     }
@@ -66,15 +74,20 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.tag.Equals("Enemy")) return;
         move = false;
         Debug.Log("Flecha impacta");
-        if (other.tag == "Player")
+        switch (other.tag)
         {
-            Debug.Log("Colision Player");
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Debug.Log("Colision Otro");
-            StartCoroutine(WaitForDisapear());
+            case "Player":
+                Debug.Log("Colision Player");
+                Destroy(this.gameObject);
+                break;
+            case "Ground":
+                Debug.Log("Colision Otro");
+                StartCoroutine(WaitForDisapear());
+                break;
+            default:
+                Debug.Log("Colision Otro");
+                StartCoroutine(WaitForDisapear());
+                break;
         }
     }
 

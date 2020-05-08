@@ -24,21 +24,27 @@ public class ComportamientoIman : MonoBehaviour
     {
         GameObject padreMio = this.transform.parent.gameObject;
         GameObject padreOtro = other.gameObject.transform.parent.gameObject;
-       
+
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(padreMio.gameObject.transform.position);
+        Vector3 offset = padreMio.gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+
         if (padreMio.transform.eulerAngles.z != 0 || Input.GetKey(KeyCode.LeftShift)) return;
         if ((isMoving) && (other.gameObject.tag == "iman"))
         {
             padreMio.GetComponent<MoveObject>().enabled = false;
-            if (this.transform.position.x <= other.transform.position.x)
+            if (padreMio.transform.position.x <= padreOtro.transform.position.x)
             {
                 //IMAN DERECHO EN MOVIMIENTO SE PEGA AL IZQUIERDO FIJO
                 if (padreOtro.transform.eulerAngles.z != 0)
                 {
-                    padreMio.transform.position = new Vector2(other.transform.position.x - (padreMio.GetComponent<BoxCollider2D>().size.x / 2), other.transform.position.y);
+                    padreMio.transform.position = new Vector3(other.transform.position.x - (padreMio.GetComponent<BoxCollider2D>().size.x / 2), other.transform.position.y, curPosition.z);
                 }
                 else
                 {
-                    padreMio.transform.position = new Vector2((padreOtro.transform.position.x - padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y);
+                    padreMio.transform.position = new Vector3((padreOtro.transform.position.x - padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y, curPosition.z);
 
                 }
                 StartCoroutine(Example(padreMio));
@@ -50,11 +56,11 @@ public class ComportamientoIman : MonoBehaviour
                 //IMAN IZQUIERDO EN MOVIMIENTO SE PEGA AL DERECHO FIJO
                 if (padreOtro.transform.eulerAngles.z != 0)
                 {
-                    padreMio.transform.position = new Vector2(other.transform.position.x + (padreMio.GetComponent<BoxCollider2D>().size.x / 2), other.transform.position.y);
+                    padreMio.transform.position = new Vector3(other.transform.position.x + (padreMio.GetComponent<BoxCollider2D>().size.x / 2), other.transform.position.y, curPosition.z);
                 }
                 else
                 {
-                    padreMio.transform.position = new Vector2((padreOtro.transform.position.x + padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y);
+                    padreMio.transform.position = new Vector3((padreOtro.transform.position.x + padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y, curPosition.z);
 
                 }
 

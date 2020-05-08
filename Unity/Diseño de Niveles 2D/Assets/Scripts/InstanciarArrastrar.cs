@@ -55,6 +55,7 @@ public class InstanciarArrastrar : MonoBehaviour
                     instancia.GetComponent<Rigidbody2D>().gravityScale = 0;
                     instancia.GetComponent<PlayerMovement>().enabled = false;
                     instancia.GetComponent<MoveObject>().enabled = true;
+                    saver.GetComponent<SaveGround>().InsertGround(instancia);
                     playerCreated = true;
                 }
                 break;
@@ -196,7 +197,7 @@ public class InstanciarArrastrar : MonoBehaviour
         }
         InputField input = doorNameText.GetComponent<InputField>();
         input.onValueChanged.AddListener(delegate { ValueChange(doorNameBtn,input); });
-        doorNameBtn.GetComponent<Button>().onClick.AddListener(delegate { SaveDoorName(input.text); });
+        doorNameBtn.GetComponent<Button>().onClick.AddListener(delegate { SaveDoorName(input.text,doorName); });
         input.Select();
         input.ActivateInputField();
     }
@@ -213,9 +214,10 @@ public class InstanciarArrastrar : MonoBehaviour
         }
     }
 
-    public void SaveDoorName(string name)
+    public void SaveDoorName(string name, GameObject doorMenu)
     {
         saver.GetComponent<SaveGround>().InsertDoor(instancia,name);
+        doorMenu.SetActive(false);
     }
 
 }

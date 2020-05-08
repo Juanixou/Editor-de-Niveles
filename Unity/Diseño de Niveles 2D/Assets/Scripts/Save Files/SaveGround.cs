@@ -16,6 +16,8 @@ public class SaveGround : MonoBehaviour
     [SerializeField]
     public List<GroundData> listaSuelos;
     public List<DoorData> listaPuertas;
+    public List<EnemiesData> listaEnemigos;
+    public List<PlayerData> listaPlayers;
     public string dataPath;
     public GameObject stateMachine;
 
@@ -26,6 +28,8 @@ public class SaveGround : MonoBehaviour
         loaded = false;
         listaObjetos = new List<GameObject>();
         listaSuelos = new List<GroundData>();
+        listaEnemigos = new List<EnemiesData>();
+        listaPlayers = new List<PlayerData>();
         stateMachine = GameObject.Find("StateController");
 
     }
@@ -64,15 +68,22 @@ public class SaveGround : MonoBehaviour
         {
             if (item == null) continue;
             //Si es un suelo...
-            if (item.tag == "Ground")
+            switch (item.tag)
             {
-                listaSuelos.Add(new GroundData(item.name, item.transform, item.GetInstanceID()));
-            }
-            else //Si es una puerta...
-            {
-                listaPuertas[contadorPuertas].position = item.transform.position;
-                contadorPuertas++;
-                //listaPuertas.Add(new DoorData(item.name, item.transform, item.GetComponent<ChangeScene>().id));
+                case "Ground":
+                    listaSuelos.Add(new GroundData(item.name, item.transform, item.GetInstanceID()));
+                    break;
+                case "Door":
+                    listaPuertas[contadorPuertas].position = item.transform.position;
+                    contadorPuertas++;
+                    //listaPuertas.Add(new DoorData(item.name, item.transform, item.GetComponent<ChangeScene>().id));
+                    break;
+                case "Enemy":
+                    listaEnemigos.Add(new EnemiesData(item.name, item.transform, item.GetInstanceID()));
+                    break;
+                case "Player":
+                    ManagePlayerInfo(item);
+                    break;
             }
             
         }
@@ -91,8 +102,23 @@ public class SaveGround : MonoBehaviour
             string jsonString = JsonHelper.ToJson(listaPuertas.ToArray(), true);
             streamWriter.Write(jsonString);
         }
+        //Guardamos datos de los Enemigos
+        using (streamWriter = File.CreateText(dataPath + "\\Enemies.txt"))
+        {
+            string jsonString = JsonHelper.ToJson(listaEnemigos.ToArray(), true);
+            streamWriter.Write(jsonString);
+        }
+        //Guardamos datos de los Players
+        Debug.Log("Players: " + listaPlayers.Count);
+        using (streamWriter = File.CreateText(dataPath + "\\Players.txt"))
+        {
+            string jsonString = JsonHelper.ToJson(listaPlayers.ToArray(), true);
+            streamWriter.Write(jsonString);
+        }
         listaSuelos.Clear();
         listaPuertas.Clear();
+        listaEnemigos.Clear();
+        listaPlayers.Clear();
     }
 
     public void LoadData()
@@ -189,8 +215,66 @@ public class SaveGround : MonoBehaviour
                                 stateMachine.GetComponent<StateMachine>().ActivarEstadosCarga(puertas[i].userDoorName, puertas[i].postDoorName);
                             }
                             break;
+                        case "Enemies.txt":
+                            listaEnemigos.Clear();
+                            //Generamos un array de suelos que contendrá todos los suelos del nivel
+                            EnemiesData[] enemies;
+                            //Leemos el JSON
+                            using (StreamReader streamReader = File.OpenText(dataPath + "\\" + file.Name))
+                            {
+                                string jsonString = streamReader.ReadToEnd();
 
+                                enemies = JsonHelper.FromJson<EnemiesData>(jsonString);
+                            }
+                            //Una vez leido el fichero, se instancian todos los suelos en la escena
+                            for (int i = 0; i < enemies.Length; i++)
+                            {
+                                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + enemies[i].enemyName, typeof(GameObject)));
+                                instancia.transform.parent = GameObject.Find("Objects").transform;
 
+                                instancia.GetComponent<MoveObject>().enabled = true;
+                                if (instancia.GetComponent<BasicEnemyMovement>() != null) instancia.GetComponent<BasicEnemyMovement>().enabled = false;
+                                if (instancia.GetComponent<MyRayCast>() != null) instancia.GetComponent<MyRayCast>().enabled = false;
+                                if (instancia.GetComponent<MyDistanceAttack>() != null) instancia.GetComponent<MyDistanceAttack>().enabled = false;
+
+                                instancia.transform.position = enemies[i].position;
+                                //listaSuelos.Add(suelos[i]);
+                                listaObjetos.Add(instancia);
+                            }
+                            break;
+                        case "Players.txt":
+                            listaPlayers.Clear();
+                            //Generamos un array de suelos que contendrá todos los suelos del nivel
+                            PlayerData[] players;
+                            //Leemos el JSON
+                            using (StreamReader streamReader = File.OpenText(dataPath + "\\" + file.Name))
+                            {
+                                string jsonString = streamReader.ReadToEnd();
+
+                                players = JsonHelper.FromJson<PlayerData>(jsonString);
+                            }
+                            //Una vez leido el fichero, se instancian todos los suelos en la escena
+                            for(int i = 0; i< players.Length; i++)
+                            {
+                                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + players[i].name, typeof(GameObject)));
+                                instancia.transform.parent = GameObject.Find("Objects").transform;
+
+                                //Gestionamos scripts para edicion
+                                instancia.GetComponent<PlayerMovement>().enabled = false;
+                                instancia.GetComponent<Rigidbody2D>().gravityScale = 0;
+                                instancia.GetComponent<MoveObject>().enabled = true;
+                                //Fin Gestion
+
+                                instancia.transform.position = players[i].position;
+                                PlayerMovement movement = instancia.GetComponent<PlayerMovement>();
+                                movement.speed = players[i].speed;
+                                movement.jumpForce = players[i].jumpForce;
+                                movement.jumpPushForce = players[i].jumpPushForce;
+                                movement.jumpWallForce = players[i].jumpWallForce;
+                                instancia.GetComponent<PlayerStats>().maxHealth = players[i].health;
+                                listaObjetos.Add(instancia);
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -267,4 +351,21 @@ public class SaveGround : MonoBehaviour
         return false;
     }
 
+    void ManagePlayerInfo(GameObject item)
+    {
+        string name = item.name;
+        Transform transf = item.transform;
+        PlayerMovement playerMov = item.GetComponent<PlayerMovement>();
+        float speed = playerMov.speed;
+        float jump = playerMov.jumpForce;
+        float jumpPush = playerMov.jumpPushForce;
+        float jumpWall = playerMov.jumpWallForce;
+        float health = item.GetComponent<PlayerStats>().maxHealth;
+        Debug.Log("Guardando player " + name);
+
+        listaPlayers.Add(new PlayerData(name, transf, speed, jump, jumpPush, jumpWall, health));
+
+    }
+
 }
+

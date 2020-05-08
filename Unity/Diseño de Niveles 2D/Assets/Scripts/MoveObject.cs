@@ -96,7 +96,7 @@ public class MoveObject : MonoBehaviour {
         {
             return;
         }
-        else
+        else if(listaColliders.Count != 0)
         {
             foreach(GameObject iman in listaColliders)
             {
@@ -108,11 +108,14 @@ public class MoveObject : MonoBehaviour {
         switch (selection)
         {
             case "Move":
-
-                foreach (GameObject iman in listaColliders)
+                if(listaColliders.Count != 0)
                 {
-                    iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
+                    foreach (GameObject iman in listaColliders)
+                    {
+                        iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
+                    }
                 }
+
                 Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
                 Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -157,10 +160,14 @@ public class MoveObject : MonoBehaviour {
 
     public void OnMouseUp()
     {
-        foreach (GameObject iman in listaColliders)
+        if(listaColliders.Count != 0)
         {
-            iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
+            foreach (GameObject iman in listaColliders)
+            {
+                iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
+            }
         }
+
         if (this.tag == "Player")
         {
             this.GetComponent<SpriteOutline>().enabled = false;
@@ -176,7 +183,9 @@ public class MoveObject : MonoBehaviour {
             imanIzq.GetComponent<BoxCollider2D>().size = new Vector2(imanIzq.GetComponent<BoxCollider2D>().size.x, imanIzq.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);
             scaleOrig = Vector3.zero;
         }
-        outln.enabled = false;
+        listaColliders.Clear();
+        transform.position.Set(transform.position.x, transform.position.y, 0.0f);
+        //outln.enabled = false;
     }
 
     public void SelectTransform(string tipo)

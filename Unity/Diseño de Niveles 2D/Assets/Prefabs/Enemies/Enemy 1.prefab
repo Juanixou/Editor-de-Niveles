@@ -3885,6 +3885,12 @@ MonoBehaviour:
   minDistance: 50
   maxDistance: 100
   healthBar: {fileID: 0}
+  groundCheck: {fileID: 0}
+  grounded: 0
+  groundRadius: 0.2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &8020812100473945335
 BoxCollider2D:
   m_ObjectHideFlags: 0
