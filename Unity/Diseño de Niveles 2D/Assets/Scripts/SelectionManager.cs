@@ -10,7 +10,7 @@ public class SelectionManager : MonoBehaviour {
     public string transformacion;
     public GameObject play;
     public GameObject pause;
-    Transform canvas;
+    Transform objects;
 
     private Vector3 playerPosition;
     private Vector3 cameraPosition;
@@ -18,7 +18,7 @@ public class SelectionManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         transformacion = "Move";
-        canvas = GameObject.Find("Canvas").transform;
+        objects = GameObject.Find("Objects").transform;
     }
 	
 	// Update is called once per frame
@@ -29,7 +29,7 @@ public class SelectionManager : MonoBehaviour {
     public void Selection()
     {
 
-        foreach (Transform instancias in canvas)
+        foreach (Transform instancias in objects)
         {
             if (instancias.gameObject.name.Contains("Clone"))
             {

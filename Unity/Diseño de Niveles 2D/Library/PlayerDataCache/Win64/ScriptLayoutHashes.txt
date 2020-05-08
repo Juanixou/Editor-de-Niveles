@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/20-04-2020/Editor2D.exe
+D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/08-05-2020/Editor2D.exe
 SceneListBegin?
 Assets/Scenes/Inicio.unity
 Assets/Scenes/Game Over.unity
@@ -131,7 +131,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 303da015e9d1de9fdb27bbc2ba279ebd Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.WaypointProgressTracker
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-72c8bfff130d1f448ced1927dbd98d5b Assembly-CSharp.dll:.SaveGround
+04dace9bb36efbc73b8b47b8eb35d72c Assembly-CSharp.dll:.SaveGround
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleOpenFileText
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker

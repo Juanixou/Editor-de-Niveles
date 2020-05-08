@@ -183,6 +183,8 @@ public class MoveObject : MonoBehaviour {
             imanIzq.GetComponent<BoxCollider2D>().size = new Vector2(imanIzq.GetComponent<BoxCollider2D>().size.x, imanIzq.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);
             scaleOrig = Vector3.zero;
         }
+        if (this.transform.Find("Marco").GetComponent<SpriteRenderer>() != null) this.transform.Find("Marco").GetComponent<SpriteRenderer>().enabled = false;
+
         listaColliders.Clear();
         transform.position.Set(transform.position.x, transform.position.y, 0.0f);
         //outln.enabled = false;

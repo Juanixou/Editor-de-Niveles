@@ -63,7 +63,11 @@ public class ComportamientoIman : MonoBehaviour
                     padreMio.transform.position = new Vector3((padreOtro.transform.position.x + padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y, curPosition.z);
 
                 }
-
+                SpriteRenderer obj = padreMio.transform.Find("Marco").GetComponent<SpriteRenderer>();
+                if (obj != null)
+                {
+                    obj.enabled = false;
+                }
                 StartCoroutine(Example(padreMio));
             }
         }
