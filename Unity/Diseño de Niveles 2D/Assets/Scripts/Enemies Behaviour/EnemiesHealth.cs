@@ -7,26 +7,33 @@ public class EnemiesHealth : MonoBehaviour
     public float maxHealth = 0;
     public float currentHealth;
     public GameObject healthBar;
+    private GameObject greenBar;
     private Animator anim;
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+
         anim = GetComponentInChildren<Animator>();
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            //This condition avoid an out of bounds exception
-            if(this.transform.GetChild(i).childCount != 0)
+
+            //This condition look for de health bar
+            if (this.transform.GetChild(i).name == "HealthBar")
             {
-                //This condition look for de health bar
-                if (this.transform.GetChild(i).GetChild(0).tag == "Health")
+                healthBar = this.transform.GetChild(i).gameObject;
+                for (int j = 0; j < healthBar.transform.childCount; j++)
                 {
-                    healthBar = this.transform.GetChild(i).GetChild(0).gameObject;
-                    GetComponent<BasicEnemyMovement>().healthBar = this.transform.GetChild(i).gameObject;
+                    if (healthBar.transform.GetChild(j).tag == "Health")
+                    {
+                        greenBar = healthBar.transform.GetChild(j).gameObject;
+                    }
                 }
             }
-            
+
+
         }
         currentHealth = maxHealth;
     }
@@ -40,21 +47,31 @@ public class EnemiesHealth : MonoBehaviour
         }
         if (currentHealth <= 0)
         {
-            this.GetComponent<BasicEnemyMovement>().enabled = false;
-            Destroy(this.GetComponent<Rigidbody2D>());
-            if (this.GetComponent<BasicEnemyMovement>() != null) Destroy(this.GetComponent<BasicEnemyMovement>());
-            if (this.GetComponent<MyDistanceAttack>() != null) Destroy(this.GetComponent<MyDistanceAttack>());
-            if (this.GetComponent<MyRayCast>() != null) Destroy(this.GetComponent<MyRayCast>());
-            StartCoroutine(Muerte());
+
+            //if (this.GetComponent<Rigidbody2D>() != null) this.GetComponent<Rigidbody2D>().isKinematic = true;
+            if (this.GetComponent<BasicEnemyMovement>() != null) this.GetComponent<BasicEnemyMovement>().enabled = false;
+            if (this.GetComponent<MyDistanceAttack>() != null) this.GetComponent<MyDistanceAttack>().enabled = false;
+            if (this.GetComponent<MyRayCast>() != null) this.GetComponent<MyRayCast>().enabled = false;
+            if (this.GetComponent<Damage>() != null) this.GetComponent<Damage>().enabled = false;
+            if (this.GetComponent<BoxCollider2D>()) this.GetComponent<BoxCollider2D>().enabled = false;
+            if (GameObject.Find("SelectionController") != null)
+            {
+                this.gameObject.SetActive(false);
+                currentHealth = maxHealth;
+                greenBar.transform.localScale = Vector2.one;
+                return;
+            }
+            else
+            {
+                StartCoroutine(Muerte());
+            }
+
             /*
             if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
             {
 
             }
             */
-
-
-
             
         }
     }
@@ -70,36 +87,29 @@ public class EnemiesHealth : MonoBehaviour
         currentHealth -= dmg;
         if (currentHealth >= 0)
         {
-            healthBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
+            greenBar.transform.localScale = new Vector2(currentHealth / maxHealth, 1);
         }
 
     }
 
     IEnumerator Muerte()
     {
-        //anim.SetBool("Muerte", true);
-        anim.Play("Die");
-        healthBar.transform.parent.transform.gameObject.SetActive(false);
-        
-        //Check if Damage Component Exist before get null point exception
-        try
-        {
-            this.GetComponent<Damage>().enabled = false;
-        }
-        catch (System.Exception e)
-        {
-            Debug.Log("No existe componente de daño. Error: " + e.ToString());
-        }
-
-        //Check if AI Component Exist before get null point exception
-        try
-        {
-            this.GetComponent<MyRayCast>().enabled = false;
-        }catch(System.Exception e)
-        {
-            Debug.Log("No existe componente de IA. Error: " + e.ToString());
-        }
+        anim.SetBool("Muerte", true);
+        if (this.transform.GetChild(this.transform.childCount - 1).name.Equals("FeetCollider")) this.transform.GetChild(this.transform.childCount - 1).gameObject.SetActive(false);
+        greenBar.transform.parent.transform.gameObject.SetActive(false);
         yield return new WaitForSeconds(5);
         Death();
     }
+
+    public void FillHealth()
+    {
+        currentHealth = maxHealth;
+        greenBar.transform.localScale = new Vector2(currentHealth / maxHealth, greenBar.transform.localScale.y);
+    }
+
+    public void EmptyHealth()
+    {
+        currentHealth = 0.0f;
+    }
+
 }

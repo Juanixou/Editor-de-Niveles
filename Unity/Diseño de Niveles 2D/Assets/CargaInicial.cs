@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class CargaInicial : MonoBehaviour
@@ -9,17 +10,18 @@ public class CargaInicial : MonoBehaviour
     void Start()
     {
         controladorDatos = GameObject.Find("DataController");
-        if (PlayerPrefs.GetString("path") != "")
+        if (PlayerPrefs.GetString("path") != "" && controladorDatos.GetComponent<SaveGround>() != null)
         {
             controladorDatos.GetComponent<SaveGround>().dataPath = PlayerPrefs.GetString("path");
+            controladorDatos.GetComponent<SaveGround>().tempPath = PlayerPrefs.GetString("path");
             PlayerPrefs.SetString("path", "");
             controladorDatos.GetComponent<SaveGround>().LoadData();
+            //LoadData();
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(PlayerPrefs.GetString("playPath") != "" && controladorDatos.GetComponent<LoadLevel>() != null)
+        {
+            controladorDatos.GetComponent<LoadLevel>().LoadData();
+        }
     }
 }

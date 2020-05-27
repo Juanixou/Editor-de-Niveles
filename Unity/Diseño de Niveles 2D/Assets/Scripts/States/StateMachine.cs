@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
 using SFB;
+using System.Windows.Forms;
 
 public class StateMachine : MonoBehaviour
 {
@@ -13,14 +14,18 @@ public class StateMachine : MonoBehaviour
     public GameObject ventana;
     public GameObject listaEscenas;
     public Dropdown opciones;
+    public Dropdown curDoors;
     public int count;
-    public int idPuertaActual;
+    public int idPuertaActual = -1;
     public string nextScene;
     public List<string> listaOpciones;
+    public List<string> listaCurDoors;
     public GameObject controlador;
     public GameObject doorNameGO;
     private DoorData[] puertas;
     private Text nextDoor;
+
+    private int nextDoorId = -1;
 
 
     // Start is called before the first frame update
@@ -28,9 +33,11 @@ public class StateMachine : MonoBehaviour
     {
         controlador = GameObject.Find("DataController");
         listaOpciones = new List<string>();
-        puertas = new DoorData[10];
+        listaCurDoors = new List<string>();
+        puertas = new DoorData[100];
         count = 0;
         opciones.onValueChanged.AddListener(delegate {DropdownValueChanged(opciones);});
+        curDoors.onValueChanged.AddListener(delegate { DropdownCurDoorChanged(curDoors);});
     }
 
     // Update is called once per frame
@@ -41,55 +48,32 @@ public class StateMachine : MonoBehaviour
 
     public void MostrarMaquina()
     {
-        ventana.SetActive(true);
-    }
-
-    public int ActivarEstados()
-    {
-        count++;
-        //Limitamos las puertas a 3 por nivel y activamos la ventana de configuración de estados.
-        if (count <= 3)
+        if (controlador.GetComponent<SaveGround>().IsSaveNecessary())
         {
-            ventana.transform.Find(count.ToString()).gameObject.SetActive(true);
-
+            if (CheckSave())
+            {
+                controlador.GetComponent<SaveGround>().SaveData();
+                listaEscenas.SetActive(true);
+                AsignarPuertasActuales();
+            }
         }
-
-        return count;
-    }
-
-    public void ActivarEstadosCarga(string doorName, string nextDoorName)
-    {
-        for(int i = 1; i <= 3; i++)
+        else
         {
-            ventana.transform.Find(i.ToString()).gameObject.SetActive(false);
+            listaEscenas.SetActive(true);
+            AsignarPuertasActuales();
         }
-
-
-        count++;
-        if (count <= 3)
-        {
-            GameObject escena = ventana.transform.Find(count.ToString()).gameObject;
-            escena.SetActive(true);
-            if(doorName!="")
-            escena.transform.Find("Nombre_" + count.ToString()).GetComponent<InputField>().text = doorName;
-            escena.transform.Find("NextDoor_" + count.ToString()).GetComponent<Text>().text = nextDoorName;
-        }
-
 
     }
 
     public void AsignarEscena()
     {
 
-        idPuertaActual = Int32.Parse(EventSystem.current.currentSelectedGameObject.name);
-        nextDoor = EventSystem.current.currentSelectedGameObject.transform.Find("NextDoor_"+idPuertaActual).GetComponent<Text>();
-
-        nextScene = StandaloneFileBrowser.OpenFolderPanel("Select Folder", UnityEngine.Application.persistentDataPath, false)[0];
+        nextScene = StandaloneFileBrowser.OpenFolderPanel("Seleccione carpeta del nivel", UnityEngine.Application.persistentDataPath, false)[0];
 
         if (nextScene != "")
         {
-            ventana.SetActive(false);
-            listaEscenas.SetActive(true);
+            nextDoorId = -1;
+            idPuertaActual = -1;
             listaOpciones.Add("None");
             if(puertas.Length!=0)
             Array.Clear(puertas, 0, puertas.Length);
@@ -111,29 +95,98 @@ public class StateMachine : MonoBehaviour
 
     }
 
+    public void AsignarPuertasActuales()
+    {
+        listaCurDoors.Add("None");
+        foreach (string nombrePuerta in controlador.GetComponent<SaveGround>().GetCurrentDoors())
+        {
+            listaCurDoors.Add(nombrePuerta);
+        }
+        curDoors.ClearOptions();
+        
+        curDoors.AddOptions(listaCurDoors);
+        listaCurDoors.Clear();
+        AsignarEscena();
+    }
+
     public void DropdownValueChanged(Dropdown drop)
     {
-        int id=-1;
-
+        nextDoorId = -1;
             for(int i = 0; i < puertas.Length; i++)
             {
                 if (puertas[i].userDoorName == drop.options[drop.value].text)
                 {
-                    id = puertas[i].id;
-                nextDoor.text = puertas[i].userDoorName;
+
+                nextDoorId = puertas[i].id;
                 }   
             }
     }
 
-    public GameObject ShowDoorNameOption()
+    public void DropdownCurDoorChanged(Dropdown drop)
+    {
+
+        idPuertaActual = -1;
+        foreach(DoorData puerta in controlador.GetComponent<SaveGround>().GetCurrentDoorsData())
+        {
+            if (puerta.userDoorName.Equals(drop.options[drop.value].text))
+            {
+                idPuertaActual = puerta.id;
+            }
+        }
+
+    }
+
+    public void ShowDoorNameOption()
     {
         doorNameGO.SetActive(true);
+        controlador.GetComponent<SaveGround>().canEnterText = true;
+        InputField input = doorNameGO.transform.GetChild(1).GetComponent<InputField>();
+        input.Select();
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public GameObject GetDoorNameOption()
+    {
         return doorNameGO;
     }
 
     public void HideNameOption()
     {
         doorNameGO.SetActive(false);
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+    }
+
+
+    public void SaveStates()
+    {
+        if (idPuertaActual != -1 && nextDoorId != -1)
+        {
+            Debug.Log(nextScene);
+            controlador.GetComponent<SaveGround>().ActualizarDatosPuerta(idPuertaActual, nextDoorId, nextScene, opciones.options[opciones.value].text);
+            opciones.value = 0;
+            curDoors.value = 0;
+            listaEscenas.SetActive(false);
+        }
+        
+    }
+
+    public bool CheckSave()
+    {
+
+        DialogResult result = MessageBox.Show("Se guardará el nivel. Continuar?", "Cuidado!",
+                             MessageBoxButtons.OK,
+                             MessageBoxIcon.Exclamation);
+        if (result == DialogResult.OK)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
 }

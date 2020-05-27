@@ -17,7 +17,6 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
 
-        //TO-DO: Coger el Health Bar del hijo, no uno genérico
         for (int i = 0; i < this.transform.childCount; i++)
         {
 
@@ -50,6 +49,11 @@ public class PlayerStats : MonoBehaviour
         }
         if (currentHealth <= 0)
         {
+            if (GameObject.Find("SelectionController") != null)
+            {
+                GameObject.Find("SelectionController").GetComponent<SelectionManager>().Editar();
+                return;
+            }
             Death();
         }
     }
@@ -66,7 +70,6 @@ public class PlayerStats : MonoBehaviour
         {
             
             greenBar.transform.localScale = new Vector2(currentHealth / maxHealth, greenBar.transform.localScale.y);
-            Debug.Log(currentHealth);
         }
 
     }
@@ -74,6 +77,17 @@ public class PlayerStats : MonoBehaviour
     public void RotateHealthBar(Quaternion rotationQuantity)
     {
         healthBar.transform.rotation = rotationQuantity;
+    }
+
+    public void FillHealth()
+    {
+        currentHealth = maxHealth;
+        greenBar.transform.localScale = new Vector2(currentHealth / maxHealth, greenBar.transform.localScale.y);
+    }
+
+    public void EmptyHealth()
+    {
+        currentHealth = 0.0f;
     }
 
 }

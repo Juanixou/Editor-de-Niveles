@@ -19,15 +19,12 @@ public class InstanciarArrastrar : MonoBehaviour
     private bool playerCreated;
     private List<GameObject> listaColliders;
 
-    private int limitDoors;
-
     //Variables Guardado
     GameObject saver;
 
     // Start is called before the first frame update
     void Start()
     {
-        limitDoors = 0;
         ventanaEstados = GameObject.Find("StateController");
         saver = GameObject.Find("DataController");
         listaColliders = new List<GameObject>();
@@ -46,7 +43,7 @@ public class InstanciarArrastrar : MonoBehaviour
             //Para el jugador
             case "Character_1":
                 //Si no se ha creado aún, lo instanciamos
-                if (!playerCreated)
+                if (GameObject.FindGameObjectWithTag("Player")== null)
                 {
                     //Instanciamos, hacemos hijo del canvas y actualizamos datos para no poder controlarlo por teclado.
                     instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
@@ -56,24 +53,26 @@ public class InstanciarArrastrar : MonoBehaviour
                     instancia.GetComponent<PlayerMovement>().enabled = false;
                     instancia.GetComponent<MoveObject>().enabled = true;
                     saver.GetComponent<SaveGround>().InsertGround(instancia);
-                    playerCreated = true;
+
+                }
+                else
+                {
+                    return;
                 }
                 break;
 
             //Para las puertas
             case "Puerta":
-                limitDoors++;
-                if (limitDoors <= 3)
-                {
-                    //Activamos la ventana de estados
-                    int id = ventanaEstados.GetComponent<StateMachine>().ActivarEstados();
-                    //Instanciamos, hacemos hijo del canvas, creamos un id para el futuro y lo metemos en la lista de serialización.
-                    instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                    instancia.transform.parent = GameObject.Find("Objects").transform;
-                    instancia.transform.position = this.transform.position;
-                    instancia.GetComponent<ChangeScene>().id = id;
-                    saver.GetComponent<SaveGround>().InsertGround(instancia);
-                }
+                //Activamos la ventana de estados
+                
+                //Instanciamos, hacemos hijo del canvas, creamos un id para el futuro y lo metemos en la lista de serialización.
+                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
+                int id = instancia.GetInstanceID();
+                instancia.transform.parent = GameObject.Find("Objects").transform;
+                instancia.transform.position = this.transform.position;
+                instancia.GetComponent<ChangeScene>().id = id;
+                saver.GetComponent<SaveGround>().InsertGround(instancia);
+
                 break;
 
             //Para el suelo
@@ -93,15 +92,6 @@ public class InstanciarArrastrar : MonoBehaviour
                     iman.GetComponentInChildren<ComportamientoIman>().enabled = true;
                     iman.GetComponentInChildren<ComportamientoIman>().isMoving = true;
                 }
-                Debug.Log(count);
-                break;
-
-            case "Espinas":
-                //Instanciamos, hacemos hijo del canvas y lo metemos en la lista de serialización.
-                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
-                instancia.transform.SetParent(GameObject.Find("Objects").transform, false);
-                instancia.transform.position = this.transform.position;
-                saver.GetComponent<SaveGround>().InsertGround(instancia);
                 break;
 
             case "Enemy 1":
@@ -116,10 +106,23 @@ public class InstanciarArrastrar : MonoBehaviour
                 if (instancia.GetComponent<BasicEnemyMovement>() != null) instancia.GetComponent<BasicEnemyMovement>().enabled = false;
                 if (instancia.GetComponent<MyRayCast>() != null) instancia.GetComponent<MyRayCast>().enabled = false;
                 if (instancia.GetComponent<MyDistanceAttack>() != null) instancia.GetComponent<MyDistanceAttack>().enabled = false;
-                //Desactivar Comportamiento
-                instancia.GetComponent<BasicEnemyMovement>().enabled = false;
+                instancia.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 break;
-
+            case "Tree 1":
+            case "Tree 2":
+            case "Tree 3":
+            case "Tree 4":
+            case "Tree 5":
+            case "Tree 6":
+            case "Portal":
+            case "Espinas":
+                instancia = Instantiate((GameObject)Resources.Load("prefabs/" + this.name, typeof(GameObject)));
+                instancia.transform.SetParent(GameObject.Find("Objects").transform, false);
+                instancia.transform.position = this.transform.position;
+                saver.GetComponent<SaveGround>().InsertGround(instancia);
+                if(instancia.GetComponent<ChangeScene>() != null) instancia.GetComponent<ChangeScene>().enabled = false;
+                //if(instancia.GetComponent<Damage>() != null) instancia.GetComponent<Damage>().enabled = false;
+                break;
             default:
                 break;
 
@@ -129,7 +132,6 @@ public class InstanciarArrastrar : MonoBehaviour
         offset = instancia.gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
         offsetSize = instancia.transform.localScale - offsetSize;
         last_mouse_pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        Camera.main.GetComponent<MoveCamera>().AddInstances(instancia);
     }
 
     void OnMouseDrag()
@@ -151,9 +153,12 @@ public class InstanciarArrastrar : MonoBehaviour
             {
                 obj.enabled = false;
             }
-        }else if (instancia.name.Contains("Puerta"))
+        } else if (instancia.name.Contains("Puerta"))
         {
-            ManageDoorName();
+            GameObject.Find("StateController").GetComponent<StateMachine>().ShowDoorNameOption();
+        } else if (instancia.name.Contains("Tree"))
+        {
+            instancia.transform.position = new Vector3(instancia.transform.position.x, instancia.transform.position.y, instancia.transform.position.z+1);
         }
 
         foreach (GameObject iman in listaColliders)
@@ -162,6 +167,7 @@ public class InstanciarArrastrar : MonoBehaviour
             iman.GetComponentInChildren<ComportamientoIman>().isMoving = false;
         }
         listaColliders.Clear();
+        saver.GetComponent<SaveGround>().SaveNecessary();
     }
 
     private void AddDescendantsWithTag(Transform parent, string tag, List<GameObject> list)
@@ -176,48 +182,5 @@ public class InstanciarArrastrar : MonoBehaviour
         }
     }
 
-    private void ManageDoorName()
-    {
-        doorName = GameObject.Find("StateController").GetComponent<StateMachine>().ShowDoorNameOption();
-
-        Transform doorNameText = null;
-        Transform doorNameBtn = null;
-
-        for(int i = 0; i < doorName.transform.childCount; ++i)
-        {
-            switch (doorName.transform.GetChild(i).name)
-            {
-                case "DoorInputField":
-                    doorNameText = doorName.transform.GetChild(i);
-                    break;
-                case "SaveDoorButton":
-                    doorNameBtn = doorName.transform.GetChild(i);
-                    break;
-            }
-        }
-        InputField input = doorNameText.GetComponent<InputField>();
-        input.onValueChanged.AddListener(delegate { ValueChange(doorNameBtn,input); });
-        doorNameBtn.GetComponent<Button>().onClick.AddListener(delegate { SaveDoorName(input.text,doorName); });
-        input.Select();
-        input.ActivateInputField();
-    }
-
-    public void ValueChange(Transform doorBtn, InputField input)
-    {
-        if(input.text != "")
-        {
-            doorBtn.GetComponent<Button>().interactable = true;
-        }
-        else
-        {
-            doorBtn.GetComponent<Button>().interactable = true;
-        }
-    }
-
-    public void SaveDoorName(string name, GameObject doorMenu)
-    {
-        saver.GetComponent<SaveGround>().InsertDoor(instancia,name);
-        doorMenu.SetActive(false);
-    }
 
 }

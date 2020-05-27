@@ -8,8 +8,10 @@ public class ProjectileBehaviour : MonoBehaviour
     public float arrowSpeed = 10.0f;
     private Vector2 target;
     private Vector2 position;
+    public float yOffset = 0.5f;
     private bool move;
     private float distanceControl;
+    public float damage = 20;
 
     public Transform playerTransform;
 
@@ -19,7 +21,7 @@ public class ProjectileBehaviour : MonoBehaviour
         distanceControl = 0;
         move = true;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        target = playerTransform.position;
+        target.Set(playerTransform.position.x, playerTransform.position.y + yOffset);
         position = gameObject.transform.position;
     }
 
@@ -37,7 +39,7 @@ public class ProjectileBehaviour : MonoBehaviour
         if(position == target)
         {
             distanceControl++;
-            target *= 2;
+            target = position* 2;
             if(distanceControl >= 4)
             {
                 Destroy(this.gameObject);
@@ -49,20 +51,18 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if (other.tag.Equals("Enemy")) return;
         if (other.tag.Equals("MeleeWeapon")) return;
+        if (other.CompareTag("Objects")) return;
         move = false;
-        Debug.Log("Flecha impacta");
         switch (other.tag)
         {
             case "Player":
-                Debug.Log("Colision Player");
+                other.GetComponent<PlayerStats>().Damage(damage);
                 Destroy(this.gameObject);
                 break;
             case "Ground":
-                Debug.Log("Colision Otro");
                 StartCoroutine(WaitForDisapear());
                 break;
             default:
-                Debug.Log("Colision Otro");
                 StartCoroutine(WaitForDisapear());
                 break;
         }
@@ -72,20 +72,17 @@ public class ProjectileBehaviour : MonoBehaviour
     public void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag.Equals("Enemy")) return;
+        if (other.CompareTag("Objects")) return;
         move = false;
-        Debug.Log("Flecha impacta");
         switch (other.tag)
         {
             case "Player":
-                Debug.Log("Colision Player");
                 Destroy(this.gameObject);
                 break;
             case "Ground":
-                Debug.Log("Colision Otro");
                 StartCoroutine(WaitForDisapear());
                 break;
             default:
-                Debug.Log("Colision Otro");
                 StartCoroutine(WaitForDisapear());
                 break;
         }

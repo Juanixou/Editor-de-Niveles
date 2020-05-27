@@ -4,69 +4,49 @@ using UnityEngine;
 
 public class MoveCamera : MonoBehaviour {
 
-    private float speed;
+    public float speed;
     private GameObject instancias;
     private GameObject transformaciones;
-    private List<GameObject> elements;
+    private float oldPosX;
     // Use this for initialization
     void Start()
     {
-        speed = 2.0f;
         instancias = GameObject.Find("Instancias");
         transformaciones = GameObject.Find("Transformaciones");
-        elements = new List<GameObject>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow)&&transform.position.x<=50)
+        if (Input.GetKey(KeyCode.RightArrow))
         {
+            oldPosX = transform.position.x;
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-            //MoveInstances("dch");
-            //instancias.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-            //transformaciones.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            UpdateBackgroundTile(transform.position.x, oldPosX);
         }
         if (Input.GetKey(KeyCode.LeftArrow)&&transform.position.x>=0)
         {
+            oldPosX = transform.position.x;
             transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            //MoveInstances("izq");
-            //instancias.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            //transformaciones.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+            UpdateBackgroundTile(transform.position.x, oldPosX);
         }
-        /************** CONTROL VERTICAL **************
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
-        }
-        */
+
     }
 
-    public void AddInstances(GameObject elem)
-    {
-        elements.Add(elem);
-    }
 
-    public void MoveInstances(string mov)
+
+    void UpdateBackgroundTile(float newPosX, float lastPosX)
     {
-        if(mov == "dch")
+
+        float xScale = (newPosX - lastPosX);
+        GameObject bckgrd = GameObject.FindGameObjectWithTag("Background");
+        if (bckgrd == null) return;
+        foreach (SpriteRenderer child in bckgrd.GetComponentsInChildren<SpriteRenderer>())
         {
-            foreach(GameObject elem in elements)
-            {
-                elem.transform.position = new Vector3(elem.transform.position.x + (-speed * Time.deltaTime), elem.transform.position.y, elem.transform.position.z);
-            }
+            child.size = new Vector2(child.size.x + xScale, child.size.y);
         }
-        else
-        {
-            foreach (GameObject elem in elements)
-            {
-                elem.transform.position = new Vector3(elem.transform.position.x + (speed * Time.deltaTime), elem.transform.position.y, elem.transform.position.z);
-            }
-        }
+
     }
 
 }

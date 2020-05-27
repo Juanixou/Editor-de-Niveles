@@ -1,11 +1,14 @@
 Win64
 PlayerPath?
-D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/08-05-2020/Editor2D.exe
+D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/V 1.0/Toolbox 2D.exe
 SceneListBegin?
 Assets/Scenes/Inicio.unity
 Assets/Scenes/Game Over.unity
 Assets/Scenes/Crear-Cargar.unity
 Assets/Scenes/Editor.unity
+Assets/Scenes/Instructions.unity
+Assets/Scenes/EndLevel.unity
+Assets/Scenes/Play.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 29be3573673419e1658051315f2d7c9b Assembly-CSharp.dll:.CameraFollowPlayer
@@ -23,6 +26,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LoadLevel
 298d7ddfdcef27c8463555d52121eaaa Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.LayerManager
 aa6c152fcb14804c0e24a3f72374d433 Assembly-CSharp.dll:.InstantiateElements
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
@@ -131,7 +135,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 303da015e9d1de9fdb27bbc2ba279ebd Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.WaypointProgressTracker
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-04dace9bb36efbc73b8b47b8eb35d72c Assembly-CSharp.dll:.SaveGround
+2096dcb66efca505016b85e89dc9b9dc Assembly-CSharp.dll:.SaveGround
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleOpenFileText
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -142,7 +146,7 @@ db1f205a8c9dae1c39098cd23fc97f63 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 a8b6c919b2049fcc280823488144371f Assembly-CSharp-firstpass.dll:UnityStandardAssets.CrossPlatformInput.Joystick
 bb3fd21860949356099597c658561899 Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.SpriteCollection
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PlayerPhysics
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MoveCamera
+afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.MoveCamera
 4f631fd718256a8c69483c396671a274 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.PlatformSpecificContent
 4e1928ba671da2c58919811f7520258d Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.CharacterEditor
 0574135745ea880aa1c1be2f2057ab89 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.ActivateTrigger
@@ -153,6 +157,7 @@ dc0c855440d59a516315a62ef55d7fd8 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EnemyDetection
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 a6f275d348c8e4c90feb90d92e163b02 Assembly-CSharp.dll:.MoveObject
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GackgroundManager
 c88c4199b288356ec3eb2f0d85abc619 Assembly-CSharp-firstpass.dll:UnityStandardAssets.CrossPlatformInput.ButtonHandler
 a4d879eed97e8d86fd752672fc026fa2 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.AutoMoveAndRotate
 7caff667fe3c97a2c77a1e4452748ab3 Assembly-CSharp.dll:.Damage
@@ -169,14 +174,14 @@ e686f3c1011429b41e0a20f13c16d626 Assembly-CSharp.dll:.CanvasSampleOpenFileImage
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleSaveFileImage
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.ObjectResetter
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MuerteCaida
-15df0af29c1ad4caecd7367eecc7a08a Assembly-CSharp.dll:.MyRayCast
+0445a62ea84dada57492b101c7048184 Assembly-CSharp.dll:.MyRayCast
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameMenu
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.DesactivarVentana
 8dc81ddb0b7b69d062a5156ba52c20b9 Assembly-CSharp.dll:.Dialogos
-cd092ba60725d2d7d167abf4d85c0dba Assembly-CSharp.dll:.MyDistanceAttack
+cb640724d1edf0961263d05a9fcb73c6 Assembly-CSharp.dll:.MyDistanceAttack
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-91b22bbf6308492319ca858ae7c891ec Assembly-CSharp.dll:.ChangeScene
-16089e76710009d8de51c35f51ad81a4 Assembly-CSharp.dll:.BasicEnemyMovement
+68539a5a90c5a211c4c925af2590d41e Assembly-CSharp.dll:.ChangeScene
+5efa8d90a4d0cbc9134f3e4307f7214f Assembly-CSharp.dll:.BasicEnemyMovement
 f0a951a38be927372a72708c6c053f18 Assembly-CSharp.dll:.ActivarVentanas
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleOpenFileTextMultiple
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.Palette
@@ -222,7 +227,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 c933b2cffdb9d1429a103e9d63c523ef Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.DynamicShadowSettings
-c16d1471299f5924f0bf5f9565af4b74 Assembly-CSharp.dll:.ProjectileBehaviour
+1ec8b646e9fe178960a6085dc10ec92e Assembly-CSharp.dll:.ProjectileBehaviour
 03b9ef2ed536e8d6280069f2195174da Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.SimpleActivatorMenu
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.AnimationEvents
@@ -241,9 +246,10 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.FPSCounter
 af6247286e9ebb931308e55dd6150e6a Assembly-CSharp.dll:.ChangeProperties
-dff08496014365f91e48a69faee10819 Assembly-CSharp.dll:.StateMachine
+a6073d64544053872b6fdc9f8d176e40 Assembly-CSharp.dll:.StateMachine
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 6650a204d51a53926852c34131b2f830 Assembly-CSharp.dll:.CanvasSampleSaveFileText
 672557fbe7a6c427c9be272c7062c402 Assembly-CSharp.dll:Assets.FantasyHeroes.Scripts.ScreenshotTransparent
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ScrollScript
 5e869f601eca6873b969dceef87d6303 Assembly-CSharp-firstpass.dll:UnityStandardAssets._2D.PlatformerCharacter2D
 47cd05cf11ce8beb2fd9a1522f58f5ec Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.AutoMobileShaderSwitch

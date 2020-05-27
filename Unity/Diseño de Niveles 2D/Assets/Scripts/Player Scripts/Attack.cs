@@ -19,7 +19,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.K)&& GetComponent<PlayerMovement>().grounded)
         {
             weapon.isAttacking = true;
             anim.SetBool("Atacar", true);

@@ -51,7 +51,7 @@ public class MoveObject : MonoBehaviour {
             {
                 list.Add(child.gameObject);
             }
-            else if (this.tag=="Ground")
+            else if (child.name.Contains("Marco"))
             {
                 outln = child.gameObject.GetComponent<SpriteRenderer>();
             }
@@ -141,8 +141,18 @@ public class MoveObject : MonoBehaviour {
                     /*Cambiar Imagen y luego ajustar colliders*/
                     Vector3 newCurSize = (curScreenPoint2 - last_mouse_pos);
                     scaleOrig += newCurSize*0.03f;
-                    Vector3 imgSize = GetComponent<SpriteRenderer>().size;
-                    GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size = imgSize + newCurSize*0.03f;
+
+                    if (GetComponent<SpriteRenderer>() != null)
+                    {
+                        Vector3 imgSize = GetComponent<SpriteRenderer>().size;
+                        GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size = imgSize + newCurSize * 0.03f;
+                        if (outln != null) {
+                            Vector3 marcoSize = outln.size;
+                            outln.size = marcoSize + newCurSize * 0.03f;
+                            Vector3 sidesSize = this.transform.Find("Sides").GetComponent<BoxCollider2D>().size;
+                            this.transform.Find("Sides").GetComponent<BoxCollider2D>().size = sidesSize + newCurSize * 0.03f;
+                        }
+                    }
 
                     last_mouse_pos = curScreenPoint2;
                 }
@@ -153,6 +163,11 @@ public class MoveObject : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Delete))
         {
+            if (this.gameObject.CompareTag("Door"))
+            {
+                DestroyDoor();
+              
+            }
             Destroy(this.gameObject);
             return;
         }
@@ -183,10 +198,11 @@ public class MoveObject : MonoBehaviour {
             imanIzq.GetComponent<BoxCollider2D>().size = new Vector2(imanIzq.GetComponent<BoxCollider2D>().size.x, imanIzq.GetComponent<BoxCollider2D>().size.y + scaleOrig.y);
             scaleOrig = Vector3.zero;
         }
-        if (this.transform.Find("Marco").GetComponent<SpriteRenderer>() != null) this.transform.Find("Marco").GetComponent<SpriteRenderer>().enabled = false;
+        if (this.transform.Find("Marco") != null) this.transform.Find("Marco").GetComponent<SpriteRenderer>().enabled = false;
 
         listaColliders.Clear();
         transform.position.Set(transform.position.x, transform.position.y, 0.0f);
+        GameObject.Find("DataController").GetComponent<SaveGround>().SaveNecessary();
         //outln.enabled = false;
     }
 
@@ -203,6 +219,11 @@ public class MoveObject : MonoBehaviour {
     public void TrasladarIman()
     {
         //Mover imanes al centro y después de rotación trasladar a los extremos
+    }
+
+    public void DestroyDoor()
+    {
+        GameObject.Find("DataController").GetComponent<SaveGround>().RemoveDoorFromList(GetComponent<ChangeScene>().id);
     }
 
     IEnumerator WaitToActive(GameObject iman)

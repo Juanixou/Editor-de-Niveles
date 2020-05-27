@@ -44,7 +44,8 @@ public class ComportamientoIman : MonoBehaviour
                 }
                 else
                 {
-                    padreMio.transform.position = new Vector3((padreOtro.transform.position.x - padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y, curPosition.z);
+                    float xDistance = (padreMio.GetComponent<SpriteRenderer>().size.x/2) + (padreOtro.GetComponent<SpriteRenderer>().size.x/2);
+                    padreMio.transform.position = new Vector3((padreOtro.transform.position.x - xDistance), padreOtro.transform.position.y, curPosition.z);
 
                 }
                 StartCoroutine(Example(padreMio));
@@ -52,7 +53,6 @@ public class ComportamientoIman : MonoBehaviour
             }
             else
             {
-                Debug.Log("Iman por la derecha");
                 //IMAN IZQUIERDO EN MOVIMIENTO SE PEGA AL DERECHO FIJO
                 if (padreOtro.transform.eulerAngles.z != 0)
                 {
@@ -60,7 +60,8 @@ public class ComportamientoIman : MonoBehaviour
                 }
                 else
                 {
-                    padreMio.transform.position = new Vector3((padreOtro.transform.position.x + padreMio.GetComponent<SpriteRenderer>().size.x), padreOtro.transform.position.y, curPosition.z);
+                    float xDistance = (padreMio.GetComponent<SpriteRenderer>().size.x / 2) + (padreOtro.GetComponent<SpriteRenderer>().size.x / 2);
+                    padreMio.transform.position = new Vector3((padreOtro.transform.position.x + xDistance), padreOtro.transform.position.y, curPosition.z);
 
                 }
                 SpriteRenderer obj = padreMio.transform.Find("Marco").GetComponent<SpriteRenderer>();

@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\Interaccion NPCs\Dialogos.cs" />
     <Compile Include="Assets\Scripts\Menus\ActivarVentanas.cs" />
     <Compile Include="Assets\Scripts\Menus\DesactivarVentana.cs" />
+    <Compile Include="Assets\Scripts\Menus\GackgroundManager.cs" />
     <Compile Include="Assets\Scripts\Menus\GameMenu.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\MoveObject.cs" />
@@ -113,6 +114,8 @@
     <Compile Include="Assets\Scripts\Save Files\EnemiesData.cs" />
     <Compile Include="Assets\Scripts\Save Files\GroundData.cs" />
     <Compile Include="Assets\Scripts\Save Files\JsonHelper.cs" />
+    <Compile Include="Assets\Scripts\Save Files\LoadLevel.cs" />
+    <Compile Include="Assets\Scripts\Save Files\ObjectsData.cs" />
     <Compile Include="Assets\Scripts\Save Files\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Save Files\SaveGround.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="Assets\Scripts\Transformaciones Objetos\ComportamientoIman.cs" />
     <Compile Include="Assets\Scripts\Trash.cs" />
     <Compile Include="Assets\Scripts\Weapon's Scripts\Melee\MeleeDamage.cs" />
+    <Compile Include="Assets\ScrollScript.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\BasicSample.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileImage.cs" />

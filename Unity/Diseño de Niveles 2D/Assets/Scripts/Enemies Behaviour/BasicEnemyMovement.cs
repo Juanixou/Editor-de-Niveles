@@ -11,6 +11,7 @@ public class BasicEnemyMovement : MonoBehaviour
     private bool dcha;
     private GameObject personaje;
     public GameObject healthBar;
+    public float speed;
 
     private Animator anim;
 
@@ -40,6 +41,7 @@ public class BasicEnemyMovement : MonoBehaviour
                 groundCheck = this.transform.GetChild(i).transform;
             }
         }
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
     }
 
     // Update is called once per frame
@@ -58,8 +60,7 @@ public class BasicEnemyMovement : MonoBehaviour
             case "Enemy 1":
                 if (dcha)
                 {
-                    Debug.Log("Pa la dcha");
-                    this.transform.position = new Vector2(this.transform.position.x + 0.01f, this.transform.position.y);
+                    this.transform.position = new Vector3(this.transform.position.x + speed, this.transform.position.y,this.transform.position.z);
                     actualDistance += 0.1f;
                     if (maxDistance != 0 && actualDistance >= maxDistance)
                     {
@@ -69,8 +70,7 @@ public class BasicEnemyMovement : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Pa la izq");
-                    this.transform.position = new Vector2(this.transform.position.x - 0.01f, this.transform.position.y);
+                    this.transform.position = new Vector3(this.transform.position.x - speed, this.transform.position.y, this.transform.position.z);
                     actualDistance -= 0.1f;
                     if (minDistance != 0 && actualDistance <= minDistance)
                     {
@@ -89,16 +89,21 @@ public class BasicEnemyMovement : MonoBehaviour
     private void CheckGround()
     {
         if (groundCheck == null) return;
-        Debug.Log("Checkeandooo");
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
 
         if (!grounded)
         {
-            Debug.Log("Cambio de lado");
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            this.GetComponent<Rigidbody2D>().gravityScale = 10;
             dcha = !dcha;
             personaje.transform.Rotate(new Vector2(0, 180));
             StartCoroutine(WaitForChecking());
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            this.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
     }
 

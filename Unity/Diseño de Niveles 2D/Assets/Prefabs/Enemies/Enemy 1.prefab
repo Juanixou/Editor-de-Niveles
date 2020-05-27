@@ -3885,6 +3885,7 @@ MonoBehaviour:
   minDistance: 50
   maxDistance: 100
   healthBar: {fileID: 0}
+  speed: 0
   groundCheck: {fileID: 0}
   grounded: 0
   groundRadius: 0.2

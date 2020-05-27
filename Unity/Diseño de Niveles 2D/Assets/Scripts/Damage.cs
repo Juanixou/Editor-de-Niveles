@@ -40,13 +40,11 @@ public class Damage : MonoBehaviour
                     other.GetComponent<PlayerStats>().Damage(damage);
                     damaged = false;
                     StartCoroutine(WaitDamage());
-                    Debug.Log("ATAQUE A PLAYER"); 
                 }
 
                 break;
 
             case "Enemy":
-                Debug.Log("Enemigo Dañado!");
                 if (isAttacking && this.tag != "EnemyMeleeWeapon")
                 {
                     other.GetComponent<EnemiesHealth>().Damage(damage);
