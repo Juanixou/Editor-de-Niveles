@@ -18,6 +18,7 @@ TagManager:
   - EnemyMeleeWeapon
   - Door
   - Background
+  - Arrow
   layers:
   - Default
   - TransparentFX

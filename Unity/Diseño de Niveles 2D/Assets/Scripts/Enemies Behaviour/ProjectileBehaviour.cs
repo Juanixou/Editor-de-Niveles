@@ -52,6 +52,7 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.tag.Equals("Enemy")) return;
         if (other.tag.Equals("MeleeWeapon")) return;
         if (other.CompareTag("Objects")) return;
+        if (other.CompareTag("Arrow")) return;
         move = false;
         switch (other.tag)
         {
@@ -73,6 +74,7 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if (other.tag.Equals("Enemy")) return;
         if (other.CompareTag("Objects")) return;
+        if (other.CompareTag("Arrow")) return;
         move = false;
         switch (other.tag)
         {

@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/V 1.0/Toolbox 2D.exe
+D:/Universidad/Editor-de-Niveles/Unity/Diseño de Niveles 2D/Builds/V 1.2/Toolbox 2D.exe
 SceneListBegin?
 Assets/Scenes/Inicio.unity
 Assets/Scenes/Game Over.unity

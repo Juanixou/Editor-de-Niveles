@@ -99,6 +99,7 @@ public class SelectionManager : MonoBehaviour {
 
 
         Camera.main.GetComponent<UnityStandardAssets._2D.Camera2DFollow>().enabled = true;
+        Camera.main.GetComponent<MoveCamera>().enabled = false;
         play.SetActive(false);
         pause.SetActive(true);
         curState = "Play";
@@ -114,6 +115,7 @@ public class SelectionManager : MonoBehaviour {
         player.GetComponentInChildren<Animator>().SetBool("Correr",false);
         player.GetComponentInChildren<Animator>().SetBool("Caminar",false);
         Camera.main.GetComponent<UnityStandardAssets._2D.Camera2DFollow>().enabled = false;
+        Camera.main.GetComponent<MoveCamera>().enabled = true;
         player.transform.position = playerPosition;
         Camera.main.transform.position = cameraPosition;
         
